@@ -61,5 +61,24 @@ public class PlataformaStreaming{
 
 		return listaFiltrada;
 	}
+	/* 
+	 * @param quantEpisodios 
+	 * @retorn listaFiltrada */
+	public Lista<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
+		Lista<Serie> listaFiltrada = new Lista<Serie>();
+		for (Serie s : series.values()) {
+			if (s.getQuantidadeEpisodios() == quantEpisodios) {
+				listaFiltrada.add(s);
+			}
+		}
+
+		return listaFiltrada;
+		
+	}
+
+	//incrementa a audiencia da serie toda vez que ela for assistida por algum Cliente.
+	public void registrarAudiencia(Serie serie) {
+		serie.setAudiencia(serie.getAudiencia() + 1);
+	}
 
 }
