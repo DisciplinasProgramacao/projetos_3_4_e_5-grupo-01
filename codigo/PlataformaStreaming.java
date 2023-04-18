@@ -1,9 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class PlataformaStreaming{
 	private String nome;
@@ -35,22 +30,33 @@ public class PlataformaStreaming{
 		ClienteAtual = clienteAtual;
 	}
 	
-	/*
-	 * Metódo para adicionar o cliente na tabela
-	 * 
-	 * @param cliente indica o cliente a ser adicionado
-	 */
+	
+	 /**
+     * Verifica com base na hash de clientes os usuários presentes e aquele que possui nome de usuario e senha iguais aos passados como parâmetro é setado como cliente atual 
+     * @param nomeUsuario indica o nome do usuario
+     * @param senha indica a senha do usuario
+     */
+	public Cliente login(String nomeUsuario, String senha) {
+		for (Cliente c : clientes.values()) {
+			if (c.getNomeDeUsuario().equals(nomeUsuario) && c.getSenha().equals(senha)) {
+				
+				setClienteAtual(c);
+				return c;
+			}
+		}
+		
+		return null;
+		
+	}
+	
+	public void adicionarSerie(Serie serie) {
+		series.put(serie.getNome(), serie);
+	}
+	
 	public void adicionarCliente(Cliente cliente) {
-		this.clientes.put(nome, cliente);
+		clientes.put(cliente.getNomeDeUsuario(), cliente);
 	}
 
-	/*
-	 * filtra o genero passado por parametro e adiciona na lista filtrada
-	 * 
-	 * @param genero indica o genero a ser buscado
-	 * 
-	 * @return Uma lista do tipo Serie com os generos buscados
-	 */
 	public Lista<Serie> filtrarPorGenero(String genero) {
 		Lista<Serie> listaFiltrada = new Lista<Serie>();
 		for (Serie s : series.values()) {
@@ -61,24 +67,42 @@ public class PlataformaStreaming{
 
 		return listaFiltrada;
 	}
-	/* 
-	 * @param quantEpisodios 
-	 * @retorn listaFiltrada */
-	public Lista<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
-		Lista<Serie> listaFiltrada = new Lista<Serie>();
-		for (Serie s : series.values()) {
-			if (s.getQuantidadeEpisodios() == quantEpisodios) {
-				listaFiltrada.add(s);
+	 
+		
+	 /**
+     * 
+     * @param nomeUsuario indica o nome do usuario
+     * @param senha indica a senha do usuario
+     */
+	 public Lista<Serie> filtrarPorIdioma(String idioma) {
+		 Lista<Serie> lista = new Lista();
+		 for (Serie s : series.values()) {
+			 if (s.getIdioma().equals(idioma)) {
+				 lista.add(s);
+			 }
+		 }
+		 
+		 return lista;
+		 
+	 }
+	 
+		/* 
+		 * @param quantEpisodios 
+		 * @retorn listaFiltrada */
+		public Lista<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
+			Lista<Serie> listaFiltrada = new Lista<Serie>();
+			for (Serie s : series.values()) {
+				if (s.getQuantidadeEpisodios() == quantEpisodios) {
+					listaFiltrada.add(s);
+				}
 			}
+
+			return listaFiltrada;
+			
 		}
 
-		return listaFiltrada;
-		
-	}
-
-	//incrementa a audiencia da serie toda vez que ela for assistida por algum Cliente.
-	public void registrarAudiencia(Serie serie) {
-		serie.setAudiencia(serie.getAudiencia() + 1);
-	}
-
+		//incrementa a audiencia da serie toda vez que ela for assistida por algum Cliente.
+		public void registrarAudiencia(Serie serie) {
+			serie.setAudiencia(serie.getAudiencia() + 1);
+		}
 }
