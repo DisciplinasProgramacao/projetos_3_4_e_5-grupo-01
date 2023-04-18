@@ -53,8 +53,7 @@ public class PlataformaStreaming{
 	 */
 	public Lista<Serie> filtrarPorGenero(String genero) {
 		Lista<Serie> listaFiltrada = new Lista<Serie>();
-		for (Entry<String, Serie> entry : series.entrySet()) {
-			Serie s = entry.getValue();
+		for (Serie s : series.values()) {
 			if (s.getGenero().equals(genero)) {
 				listaFiltrada.add(s);
 			}
