@@ -105,4 +105,25 @@ public class PlataformaStreaming{
 		public void registrarAudiencia(Serie serie) {
 			serie.setAudiencia(serie.getAudiencia() + 1);
 		}
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void carregaArquivo() throws IOException {
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Qual o caminho do arquivo CSV");
+		String csvFilePath = scan.nextLine();
+		String linha = "";
+		String regex = ",";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))){
+			while ((linha = br.readLine()) != null) {
+				String[] campos = linha.split(regex);
+			
+			} 
+		} catch (IOException e) {
+			System.out.println("Ocorreu um erro no arquivo");
+		}
+	}
 }
