@@ -49,14 +49,27 @@ public class PlataformaStreaming{
 		
 	}
 	
+	/**
+     * Adiciona uma serie na lista de series  
+     * @param serie
+     */
 	public void adicionarSerie(Serie serie) {
 		series.put(serie.getNome(), serie);
 	}
 	
+	/**
+     * Adiciona o cliente na lista de clientes   
+     * @param cliente
+     */
 	public void adicionarCliente(Cliente cliente) {
 		clientes.put(cliente.getNomeDeUsuario(), cliente);
 	}
-
+	
+	/**
+     * Filtra a lista de series por genero  
+     * @param genero indica o genero a ser filtrado 
+     * @return listaFiltrada retorna uma nova lista com as series do genero indicado
+     */
 	public Lista<Serie> filtrarPorGenero(String genero) {
 		Lista<Serie> listaFiltrada = new Lista<Serie>();
 		for (Serie s : series.values()) {
@@ -69,10 +82,10 @@ public class PlataformaStreaming{
 	}
 	 
 		
-	 /**
-     * 
-     * @param nomeUsuario indica o nome do usuario
-     * @param senha indica a senha do usuario
+	/**
+     * Filtra a lista de series por idioma  
+     * @param idioma indica o idioma a ser filtrado 
+     * @return listaFiltrada retorna uma nova lista com as series do idioma indicado
      */
 	 public Lista<Serie> filtrarPorIdioma(String idioma) {
 		 Lista<Serie> lista = new Lista();
