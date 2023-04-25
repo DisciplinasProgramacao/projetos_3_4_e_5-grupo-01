@@ -99,9 +99,11 @@ public class PlataformaStreaming{
 		 
 	 }
 	 
-		/* 
-		 * @param quantEpisodios 
-		 * @retorn listaFiltrada */
+		/**
+     * Filtra a lista de series por quantidade de episodios   
+     * @param quantEpisodios indica a quantidade a ser filtrada 
+     * @return listaFiltrada retorna uma nova lista com as series da quantidade indicada
+     */
 		public Lista<Serie> filtrarPorQtdEpisodios(int quantEpisodios) {
 			Lista<Serie> listaFiltrada = new Lista<Serie>();
 			for (Serie s : series.values()) {
