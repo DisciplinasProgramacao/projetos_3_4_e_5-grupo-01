@@ -124,21 +124,22 @@ public class PlataformaStreaming{
 	 * 
 	 * @throws IOException
 	 */
-	public void carregaArquivo() throws IOException {
-		Scanner scan = new Scanner(System.in);
-		
-		System.out.println("Qual o caminho do arquivo CSV");
-		String csvFilePath = scan.nextLine();
-		String linha = "";
-		String regex = ",";
-		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))){
-			while ((linha = br.readLine()) != null) {
-				String[] campos = linha.split(regex);
-			
-			} 
-		} catch (IOException e) {
-			System.out.println("Ocorreu um erro no arquivo");
-		}
+	public String[] carregaArquivo(String caminhoArquivo) throws IOException {
+	    String csvFilePath = caminhoArquivo;
+	    String linha = "";
+	    String regex = ",";
+	    String[] campos = null;
+
+	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+	        linha = br.readLine();
+	        if (linha != null) {
+	            campos = linha.split(regex);
+	        }
+	    } catch (IOException e) {
+	        System.out.println("Ocorreu um erro no arquivo");
+	    }
+
+	    return campos;
 	}
+
 }
