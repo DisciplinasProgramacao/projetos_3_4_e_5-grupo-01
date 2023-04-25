@@ -1,16 +1,14 @@
 public class Filme {
 	private String nome;
-	private String genero;
-	private String idioma;
+	private int dataLancamento;
 	private int duracaoSeg;
-	private int audiencia;
+	private int idFilme;
   
-	public Filme(String nome, String genero, String idioma, int duracaoSeg, int audiencia) {
+	public Filme(String nome, int duracaoSeg, int idFilme, int dataLancamento) {
 		this.nome = nome;
-		this.genero = genero;
-		this.idioma = idioma;
+		this.dataLancamento = dataLancamento;
 		this.duracaoSeg = duracaoSeg;
-		this.audiencia = audiencia;
+		this.idFilme = idFilme;
 	}
   
 	public String getNome() {
@@ -21,36 +19,28 @@ public class Filme {
 		this.nome = nome;
 	}
   
-	public String getGenero() {
-		return genero;
+	public int getDataLancamento() {
+		return dataLancamento;
 	}
   
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-  
-	public String getIdioma() {
-		return idioma;
-	}
-  
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
+	public void setDataLancamento(int dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
   
 	public int duracaoSeg() {
 		return duracaoSeg;
 	}
   
-	public void setQuantidadeEpisodios(int duracaoSeg) {
+	public void setDuracaoSeg(int duracaoSeg) {
 		this.duracaoSeg = duracaoSeg;
 	}
   
-	public int getAudiencia() {
-		return audiencia;
+	public int getIdFilme() {
+		return idFilme;
 	}
   
-	public void setAudiencia(int audiencia) {
-		this.audiencia = audiencia;
+	public void setAudiencia(int idFilme) {
+		this.idFilme = idFilme;
 	}
 	
 }
