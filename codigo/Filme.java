@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Filme {
 	private String nome;
 	private String genero;
@@ -52,4 +56,20 @@ public class Filme {
 	public void setAudiencia(int audiencia) {
 		this.audiencia = audiencia;
 	}
+	
+	public void carregaArquivo(String caminhoArquivo, Filme filme) throws IOException {
+        String linha;
+        String regex = ",";
+        String[] campos = null;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            linha = br.readLine();
+            if (linha != null) {
+                campos = linha.split(regex);
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro no arquivo");
+        }
+
+    }
 }
