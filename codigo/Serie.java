@@ -1,4 +1,8 @@
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 public class Serie {
 	private static final String[] GENEROS = {"romance", "acao", "comedia"};
@@ -66,4 +70,19 @@ public class Serie {
     setAudiencia(this.audiencia + 1);
   
   }
+  public void carregaArquivo(String caminhoArquivo, Serie serie) throws IOException {
+        String linha;
+        String regex = ",";
+        String[] campos = null;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            linha = br.readLine();
+            if (linha != null) {
+                campos = linha.split(regex);
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro no arquivo");
+        }
+
+    }
 }
