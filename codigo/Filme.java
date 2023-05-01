@@ -57,7 +57,7 @@ public class Filme {
 		this.audiencia = audiencia;
 	}
 	
-	public void carregaArquivo(String caminhoArquivo, Filme filme) throws IOException {
+	public void carregaFilme(String caminhoArquivo, Filme filme) throws IOException {
         String linha;
         String regex = ",";
         String[] campos = null;
