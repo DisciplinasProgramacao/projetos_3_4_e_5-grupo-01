@@ -70,7 +70,7 @@ public class Serie {
     setAudiencia(this.audiencia + 1);
   
   }
-  public void carregaArquivo(String caminhoArquivo, Serie serie) throws IOException {
+  public void carregaSerie(String caminhoArquivo, Serie serie) throws IOException {
         String linha;
         String regex = ",";
         String[] campos = null;
