@@ -152,7 +152,8 @@ public class PlataformaStreaming{
 
 		if (linha != null) {
 			campos = linha.split(regex);
-		
+			String login = campos[0];
+			clientes.get(login);
 		}
 	}
 
@@ -162,8 +163,14 @@ public class PlataformaStreaming{
 
 		if (linha != null) {
 			campos = linha.split(regex);
-			
+			String idSerie = campos[2];
+			String login = campos[0];
+			series.get(idSerie);
 		}
+	}
+
+	public void colocaLista() {
+
 	}
 
 }

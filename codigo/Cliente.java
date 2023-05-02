@@ -14,6 +14,14 @@ public class Cliente {
 			this.listaParaVer = new Lista<Midia>();
 			this.listaJaVista = new Lista<Midia>();
 		}
+
+		public String getLogin() {
+			return login;
+		}
+
+		public void setLogin(String login) {
+			this.login = login;
+		}
 		
 		public String getNomeDeUsuario() {
 			return nomeDeUsuario;
