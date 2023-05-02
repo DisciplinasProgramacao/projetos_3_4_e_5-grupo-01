@@ -24,8 +24,10 @@ public class Filme extends Midia {
 
 		if (linha != null) {
 			campos = linha.split(regex);
+			int aux = Integer.parseInt(campos[3]) * 60;
+			//IdFilme;Nome;DataDeLançamento;Duração(min)
 			Filme filme = new Filme(campos[1], GENEROS[gerador.nextInt(3)], IDIOMAS[gerador.nextInt(3)],
-					gerador.nextInt(24), gerador.nextInt(0, 100000), Integer.parseInt(campos[0]), campos[2]);
+					aux, gerador.nextInt(0, 100000), Integer.parseInt(campos[0]), campos[2]);
 			return filme;
 		}
 		return null;
