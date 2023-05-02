@@ -146,4 +146,24 @@ public class PlataformaStreaming{
 	    return campos;
 	}
 
+	public void carregaEspectador(String linha) {
+		String regex = ",";
+		String[] campos = null;
+
+		if (linha != null) {
+			campos = linha.split(regex);
+		
+		}
+	}
+
+	public void carregaAudiencia(String linha) {
+		String regex = ",";
+		String[] campos = null;
+
+		if (linha != null) {
+			campos = linha.split(regex);
+			
+		}
+	}
+
 }
