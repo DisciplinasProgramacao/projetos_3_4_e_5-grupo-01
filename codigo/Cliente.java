@@ -130,5 +130,42 @@ public class Cliente {
 	    
 	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
 	  }
+	
+	  public void avaliar() {
+		 Serie[] series = new Serie[listaJaVista.size()];
+		 series = listaJaVista.allElements(series);
+		  int avaliacao;
+		  Scanner scan = new Scanner( System.in );
+		  
+		  for (Serie s: series) {
+			  if(notas.containsKey(s) && notas.contains(null)) {
+				  System.out.println("Qual nota deseja dar para: " + s.getNome());
+				  avaliacao = scan.nextInt();
+				  while(avaliacao > 10 && avaliacao < 0) {
+					  System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
+					  avaliacao = scan.nextInt();
+				  }
+				  notas.put(s, avaliacao);
+			  }
+			  else if (notas.containsKey(s) && !notas.contains(null)) {
+				  Integer a = notas.get(s);
+				  System.out.println("Deseja atualizar a nota da mídia: " + s.getNome() + "\n a nota atual é: " + a);
+				  System.out.println("1- Sim \n 2- Não");
+				  avaliacao = scan.nextInt();
+				  if (avaliacao == 1 ) {
+				  avaliacao = scan.nextInt();
+				  while(avaliacao > 10 && avaliacao < 0) {
+					  System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
+					  avaliacao = scan.nextInt();
+				  }
+				  notas.replace(s, a, avaliacao);
+				  }
+			  }
+			  else {
+				  System.err.println("Sua lista de mídias vistas está vazia, veja alguma mídia para que seja possível avaliar algo");
+			  }
+		  }
+		  
+	  }
 	  
 	}
