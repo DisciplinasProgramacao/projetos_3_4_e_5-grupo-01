@@ -2,44 +2,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Filme {
-	private String nome;
-	private String genero;
-	private String idioma;
+public class Filme extends Midia{
+		
 	private int duracaoSeg;
-	private int audiencia;
   
 	public Filme(String nome, String genero, String idioma, int duracaoSeg, int audiencia) {
-		this.nome = nome;
-		this.genero = genero;
-		this.idioma = idioma;
+		super(nome,genero,idioma,audiencia);
 		this.duracaoSeg = duracaoSeg;
-		this.audiencia = audiencia;
+
 	}
   
-	public String getNome() {
-		return nome;
-	}
-  
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-  
-	public String getGenero() {
-		return genero;
-	}
-  
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-  
-	public String getIdioma() {
-		return idioma;
-	}
-  
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
-	}
   
 	public int getDuracaoSeg() {
 		return duracaoSeg;
@@ -49,13 +21,6 @@ public class Filme {
 		this.duracaoSeg = duracaoSeg;
 	}
   
-	public int getAudiencia() {
-		return audiencia;
-	}
-  
-	public void setAudiencia(int audiencia) {
-		this.audiencia = audiencia;
-	}
 	
 	public void carregaFilme(String caminhoArquivo, Filme filme) throws IOException {
         String linha;
