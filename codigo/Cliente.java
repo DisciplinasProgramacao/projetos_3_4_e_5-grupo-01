@@ -3,12 +3,14 @@ public class Cliente {
 		
 		private String nomeDeUsuario;
 		private String senha;
+		private String login;
 		private Lista<Midia> listaParaVer;
 		private Lista<Midia> listaJaVista;
 		
-		public Cliente(String nomeDeUsuario, String senha) {
+		public Cliente(String nomeDeUsuario, String senha, String login) {
 			this.nomeDeUsuario = nomeDeUsuario;
 			this.senha = senha;
+			this.login = login;
 			this.listaParaVer = new Lista<Midia>();
 			this.listaJaVista = new Lista<Midia>();
 		}
