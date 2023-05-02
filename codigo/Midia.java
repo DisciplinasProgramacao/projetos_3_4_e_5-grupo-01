@@ -1,17 +1,20 @@
 
-
 public class Midia {
 
 	private String nome;
 	private String genero;
 	private String idioma;
 	private int audiencia;
+	private String dataLancamento;
+	private long id;
 
-	public Midia(String nome, String genero, String idioma, int audiencia) {
+	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento,long id) {
 		this.nome = nome;
 		this.genero = genero;
 		this.idioma = idioma;
 		this.audiencia = audiencia;
+		this.dataLancamento = dataLancamento;
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -52,5 +55,21 @@ public class Midia {
 
 		setAudiencia(getAudiencia() + 1);
 
+	}
+
+	public String getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(String dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
