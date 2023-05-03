@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 class Main {
-  public static void main(String[] args) {
+public static void main(String[] args) {
 
 
     PlataformaStreaming app = new PlataformaStreaming();
@@ -12,56 +12,56 @@ class Main {
     File arquivoSerie = new File("../arquivos/POO_Filmes.csv");
     File arquivoFilme = new File("../arquivos/POO_Series.csv");
 
-
+    //System.out.println(arquivoFilme);
         //subindo arquivos de filme e series
-        try{        
-            Scanner leitorCSV = new Scanner(arquivoSerie);
-            leitorCSV.useDelimiter(";");
+    try{        
+        Scanner leitorCSV = new Scanner(arquivoSerie);
+        leitorCSV.useDelimiter(";");
 
-            while (leitorCSV.hasNext()) {
-                String linha = leitorCSV.nextLine();
+        while (leitorCSV.hasNext()) {
+            String linha = leitorCSV.nextLine();
 
-                app.adicionarMidia(Serie.carregaSerie(linha));
-            }
-            leitorCSV.close();
+            app.adicionarMidia(Serie.carregaSerie(linha));
+        }
+        leitorCSV.close();
 
-            leitorCSV = new Scanner(arquivoFilme);
+        leitorCSV = new Scanner(arquivoFilme);
 
-            while (leitorCSV.hasNext()) {
-                String linha = leitorCSV.nextLine();
+        while (leitorCSV.hasNext()) {
+            String linha = leitorCSV.nextLine();
 
-                app.adicionarMidia(Filme.carregaFilme(linha));
-            }
-
-            leitorCSV.close();
-
-            
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo CSV não encontrado!");
+            app.adicionarMidia(Filme.carregaFilme(linha));
         }
 
+        leitorCSV.close();
 
-        //espectadores
-        File arquivoCSV = new File("../arquivos/POO_Espectadores.csv");
-        try {
-            Scanner leitorCSV = new Scanner(arquivoCSV);
+        
+    } catch (FileNotFoundException e) {
+        System.out.println("Arquivo CSV não encontrado!");
+    }
 
-            leitorCSV.useDelimiter(";");
 
-            while (leitorCSV.hasNext()) {
-                String linha = leitorCSV.nextLine();
+    //espectadores
+    File arquivoCSV = new File("../arquivos/POO_Espectadores.csv");
+    try {
+        Scanner leitorCSV = new Scanner(arquivoCSV);
 
-                app.carregaEspectador(linha);
+        leitorCSV.useDelimiter(";");
 
-            }
+        while (leitorCSV.hasNext()) {
+            String linha = leitorCSV.nextLine();
 
-            leitorCSV.close();
+            app.carregaEspectador(linha);
 
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo CSV não encontrado!");
         }
+
+        leitorCSV.close();
+
+    } catch (FileNotFoundException e) {
+        System.out.println("Arquivo CSV não encontrado!");
+    }
 
 
         //
-  }
+}
 }

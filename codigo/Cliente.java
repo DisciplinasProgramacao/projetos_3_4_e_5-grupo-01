@@ -133,10 +133,10 @@ public class Cliente {
 	     * Verifica a existência dessa série, remove ela da listaPraVer do Cliente e a adiciona na listaJavistas do Cliente
 	     * @param serie indica a serie para ser registrada
 	     */
-	  public void registrarAudiencia(Midia serie) {
-	    listaParaVer.removeS(serie.getNome());
-	    listaJaVista.add(serie);
-	    serie.registrarAudiencia();
+	  public void registrarAudiencia(Midia m) {
+	    listaParaVer.removeS(m.getNome());
+	    listaJaVista.add(m);
+	    m.registrarAudiencia();
 	    
 	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
 	  }
