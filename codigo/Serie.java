@@ -26,7 +26,7 @@ public class Serie extends Midia{
 	}
 
 
-  public Serie carregaSerie(String linha) {
+  public static Serie carregaSerie(String linha) {
         String regex = ",";
         String[] campos = null;
         Random gerador = new Random();

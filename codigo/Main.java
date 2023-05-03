@@ -14,8 +14,6 @@ class Main {
 
             while (leitorCSV.hasNext()) {
                 String linha = leitorCSV.nextLine();
-                String[] colunas = linha.split(";");
-
             }
 
             leitorCSV.close();
