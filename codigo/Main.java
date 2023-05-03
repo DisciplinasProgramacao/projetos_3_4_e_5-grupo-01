@@ -7,15 +7,13 @@ class Main {
   public static void main(String[] args) {
 
 
-    //Espectadores
-    File arquivoCSV = new File("../arquivos/POO_Espectadores.csv");
     PlataformaStreaming app = new PlataformaStreaming();
 
     File arquivoSerie = new File("../arquivos/POO_Filmes.csv");
     File arquivoFilme = new File("../arquivos/POO_Series.csv");
 
 
-        
+        //subindo arquivos de filme e series
         try{        
             Scanner leitorCSV = new Scanner(arquivoSerie);
             leitorCSV.useDelimiter(";");
@@ -43,9 +41,8 @@ class Main {
         }
 
 
-
-
-
+        //espectadores
+        File arquivoCSV = new File("../arquivos/POO_Espectadores.csv");
         try {
             Scanner leitorCSV = new Scanner(arquivoCSV);
 
@@ -54,9 +51,7 @@ class Main {
             while (leitorCSV.hasNext()) {
                 String linha = leitorCSV.nextLine();
 
-                // String[] colunas = linha.split(";");
-
-
+                app.carregaEspectador(linha);
 
             }
 
