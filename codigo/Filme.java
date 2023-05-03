@@ -17,7 +17,7 @@ public class Filme extends Midia {
 		this.duracaoSeg = duracaoSeg;
 	}
 
-	static public Filme carregaFilme(String linha) {
+	public static Filme carregaFilme(String linha) {
 		String regex = ",";
 		String[] campos = null;
 		Random gerador = new Random();
