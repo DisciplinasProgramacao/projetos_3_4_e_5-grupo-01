@@ -151,6 +151,7 @@ public class PlataformaStreaming{
 	//     return campos;
 	// }
 
+
 	public void carregaEspectador(String linha) {
 		String regex = ",";
 		String[] campos = null;
@@ -171,12 +172,19 @@ public class PlataformaStreaming{
 			campos = linha.split(regex);
 			String idSerie = campos[2];
 			String recebe = campos[1];
-			series.get(idSerie);
+			String login = campos[0];
+
+			Midia m = midia.get(idSerie);
+			Cliente c = clientes.get(login);
+
+			if (recebe.equals("F")) {
+				c.adicionaNaLista(m);
+
+			} else if (recebe.equals("A")) {
+				c.adicionaNaListaVistas(m);
+				m.registrarAudiencia();
+			}
 		}
-	}
-
-	public void colocaLista() {
-
 	}
 
 }
