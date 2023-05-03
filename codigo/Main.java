@@ -139,7 +139,7 @@ public static void main(String[] args) throws FileNotFoundException {
                 }
                 break;
             case 4:
-                
+                scanner.nextLine();
                 System.out.println("Qual é o nome do Cliente?");
                 String nome = scanner.nextLine();
                 System.out.println("Qual é a senha do Cliente?");
