@@ -59,6 +59,9 @@ public class Cliente {
 	  public void adicionaNaLista(Midia serie) {
 	    listaParaVer.add(serie);
 	  }
+	  public void adicionaNaListaVistas(Midia serie) {
+	    listaParaVer.add(serie);
+	  }
 		
 		public void retirarDaLista(String nomeDaMidia) {
 	    listaParaVer.removeS(nomeDaMidia);
@@ -140,6 +143,7 @@ public class Cliente {
 	    
 	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
 	  }
+	  
 	
 	  public void avaliar() {
 		 Serie[] series = new Serie[listaJaVista.size()];
@@ -177,7 +181,5 @@ public class Cliente {
 		  }
 		  
 	  }
-
-	
 	  
 	}
