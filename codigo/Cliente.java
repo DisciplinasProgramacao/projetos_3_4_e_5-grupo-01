@@ -55,17 +55,17 @@ public class Cliente {
 			this.listaJaVista = listaJaVista;
 		}
 
-	  
-	  public void adicionaNaLista(Midia serie) {
-	    listaParaVer.add(serie);
-	  }
-	  public void adicionaNaListaVistas(Midia serie) {
-	    listaParaVer.add(serie);
-	  }
 		
-		public void retirarDaLista(String nomeDaMidia) {
-	    listaParaVer.removeS(nomeDaMidia);
-	  }
+		public void adicionaNaListaParaVer(Midia serie) {
+			listaParaVer.add(serie);
+		}
+		public void adicionaNaListaVistas(Midia serie) {
+			listaParaVer.add(serie);
+		}
+			
+			public void retirarDaLista(String nomeDaMidia) {
+			listaParaVer.removeS(nomeDaMidia);
+		}
 		
 	  public Lista<Midia> filtrarPorGenero(String genero) {
 	    Lista<Midia> listaFiltrada = new Lista<Midia>();
@@ -180,6 +180,10 @@ public class Cliente {
 			  }
 		  }
 		  
+	  }
+
+	  public String toString(){
+		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
 	  }
 	  
 	}

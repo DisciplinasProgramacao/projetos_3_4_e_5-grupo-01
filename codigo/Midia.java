@@ -6,9 +6,9 @@ public class Midia {
 	private String idioma;
 	private int audiencia;
 	private String dataLancamento;
-	private long id;
+	private int id;
 
-	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento,long id) {
+	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
 		this.genero = genero;
 		this.idioma = idioma;
@@ -65,11 +65,22 @@ public class Midia {
 		this.dataLancamento = dataLancamento;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String toString() {
+        return "Mídia:\n" +
+                "ID: " + getId() + "\n" +
+                "Nome: " + getNome() + "\n" +
+                "Gênero: " + getGenero() + "\n" +
+                "Idioma: " + getIdioma() + "\n" +
+                "Audiência: " + getAudiencia() + "\n" +
+                "Data de Lançamento: " + getDataLancamento() + "\n";
+    }
+
 }

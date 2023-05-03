@@ -1,15 +1,19 @@
 import java.util.HashMap;
-import java.util.Map;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
+
 
 public class PlataformaStreaming{
 	private String nome;
 	private HashMap<String, Midia> midia;
 	private HashMap<String, Cliente> clientes;
-	private Cliente ClienteAtual;
+	private Cliente clienteAtual;
+
+
+	public PlataformaStreaming(String nome, Cliente clienteAtual) {
+		this.nome = nome;
+		this.midia = new HashMap<String, Midia>();
+		this.clientes = new HashMap<String, Cliente>();
+		this.clienteAtual = clienteAtual;
+	}
 
 	public String getNome() {
 		return nome;
@@ -32,10 +36,10 @@ public class PlataformaStreaming{
 		this.clientes = clientes;
 	}
 	public Cliente getClienteAtual() {
-		return ClienteAtual;
+		return clienteAtual;
 	}
 	public void setClienteAtual(Cliente clienteAtual) {
-		ClienteAtual = clienteAtual;
+		this.clienteAtual = clienteAtual;
 	}
 	
 	
@@ -62,7 +66,7 @@ public class PlataformaStreaming{
      * @param serie
      */
 	public void adicionarMidia(Midia midia) {
-		((Map<String, Midia>) midia).put(midia.getNome(), midia);
+		this.midia.put(Integer.toString(midia.getId()), midia);
 	}
 	
 	/**
@@ -153,37 +157,59 @@ public class PlataformaStreaming{
 
 
 	public void carregaEspectador(String linha) {
-		String regex = ",";
+		String regex = ";";
 		String[] campos = null;
 
 		if (linha != null) {
 			campos = linha.split(regex);
-		    String login = campos[0];
-			Cliente c = clientes.get(login);
+		    String nome = campos[0];
+			// System.out.println(nome);
+			String login = campos[1];
+			String senha = campos[2];
+
+			// Cliente c = clientes.get(login);
+			Cliente c = new Cliente(nome, senha, login);
+
 			clientes.put(login, c);
 		}
 	}
 
 	public void carregaAudiencia(String linha) {
-		String regex = ",";
+		String regex = ";";
 		String[] campos = null;
 
 		if (linha != null) {
 			campos = linha.split(regex);
-			String idSerie = campos[2];
-			String recebe = campos[1];
 			String login = campos[0];
+			// System.out.println(login);
+			String jaVisto = campos[1];
+			String idMidia = campos[2];
+			
 
-			Midia m = midia.get(idSerie);
-			Cliente c = clientes.get(login);
+			try{
+				Midia m = midia.get(idMidia);
+				// System.out.println(m.toString());
 
-			if (recebe.equals("F")) {
-				c.adicionaNaLista(m);
+				if(m != null){
+					Cliente c = clientes.get(login);
 
-			} else if (recebe.equals("A")) {
-				c.adicionaNaListaVistas(m);
-				m.registrarAudiencia();
+					if (jaVisto.equals("F")) { //nao assitido
+						c.adicionaNaListaParaVer(m);
+
+					} else if (jaVisto.equals("A")) { //ja assistido
+						c.adicionaNaListaVistas(m);
+						m.registrarAudiencia();
+					}	
+				}
+
+				return;
+				
+			} catch (Exception e){
+				System.out.println(e);
+				return;
 			}
+
+			
 		}
 	}
 

@@ -6,7 +6,7 @@ public class Serie extends Midia{
 	private static final String[] IDIOMAS = {"PT-BR", "PT-PG", "ENG"};
 	private int quantidadeEpisodios;
   
-	public Serie(String nome, String genero, String idioma, int quantidadeEpisodios, int audiencia, long idSerie, String dataLancamento) {
+	public Serie(String nome, String genero, String idioma, int quantidadeEpisodios, int audiencia, int idSerie, String dataLancamento) {
 		super(nome,genero,idioma,audiencia,dataLancamento,idSerie);
 		this.quantidadeEpisodios = quantidadeEpisodios;
 	}
@@ -27,13 +27,28 @@ public class Serie extends Midia{
 
 
   public static Serie carregaSerie(String linha) {
-        String regex = ",";
+        String regex = ";";
         String[] campos = null;
-        Random gerador = new Random();
+        // Random gerador = new Random();
+
 
             if (linha != null) {
                 campos = linha.split(regex);
-                Serie serie = new Serie (campos[1], GENEROS[gerador.nextInt(3)], IDIOMAS[gerador.nextInt(3)], gerador.nextInt(24), gerador.nextInt(0, 100000), Integer.parseInt(campos[0]), campos[2]);
+				int id = Integer.parseInt(campos[0].trim());
+				// System.out.println(id);
+				String nome = campos[1];
+				String dataLancamento = campos[2];
+
+				Random random = new Random();
+        		int genero = random.nextInt(3);
+				int idioma = random.nextInt(3);
+				int qtdEp = random.nextInt(24);
+
+
+
+				// Serie s = new Serie(nome, )
+
+                Serie serie = new Serie (nome, GENEROS[genero], IDIOMAS[idioma], qtdEp, 0, id, dataLancamento);
                 return serie;
             }
             return null;
