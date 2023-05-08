@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Cliente {
 		
@@ -6,6 +8,7 @@ public class Cliente {
 		private String login;
 		private Lista<Midia> listaParaVer;
 		private Lista<Midia> listaJaVista;
+		private HashMap<Midia, Integer> notas;
 		
 		public Cliente(String nomeDeUsuario, String senha, String login) {
 			this.nomeDeUsuario = nomeDeUsuario;
@@ -13,6 +16,7 @@ public class Cliente {
 			this.login = login;
 			this.listaParaVer = new Lista<Midia>();
 			this.listaJaVista = new Lista<Midia>();
+			this.notas = new HashMap<Midia, Integer>();
 		}
 
 		public String getLogin() {
@@ -145,45 +149,63 @@ public class Cliente {
 	  }
 	  
 	
-	  public void avaliar() {
-		 Serie[] series = new Serie[listaJaVista.size()];
-		 series = listaJaVista.allElements(series);
-		  int avaliacao;
-		  Scanner scan = new Scanner( System.in );
-		  
-		  for (Serie s: series) {
-			  if(notas.containsKey(s) && notas.contains(null)) {
-				  System.out.println("Qual nota deseja dar para: " + s.getNome());
-				  avaliacao = scan.nextInt();
-				  while(avaliacao > 10 && avaliacao < 0) {
-					  System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
-					  avaliacao = scan.nextInt();
-				  }
-				  notas.put(s, avaliacao);
-			  }
-			  else if (notas.containsKey(s) && !notas.contains(null)) {
-				  Integer a = notas.get(s);
-				  System.out.println("Deseja atualizar a nota da mídia: " + s.getNome() + "\n a nota atual é: " + a);
-				  System.out.println("1- Sim \n 2- Não");
-				  avaliacao = scan.nextInt();
-				  if (avaliacao == 1 ) {
-				  avaliacao = scan.nextInt();
-				  while(avaliacao > 10 && avaliacao < 0) {
-					  System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
-					  avaliacao = scan.nextInt();
-				  }
-				  notas.replace(s, a, avaliacao);
-				  }
-			  }
-			  else {
-				  System.err.println("Sua lista de mídias vistas está vazia, veja alguma mídia para que seja possível avaliar algo");
-			  }
-		  }
-		  
-	  }
+	public void avaliar(Midia mid) {
+		Midia[] midias = new Midia[listaJaVista.size()];
+		midias = listaJaVista.allElements(midias);
+		int avaliacao;
+		Scanner scan = new Scanner( System.in );
+		
+		for (Midia m: midias) {
+			if(m.getId() == mid.getId()) {
 
-	  public String toString(){
-		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
-	  }
-	  
+				if(!notas.containsKey(m)){
+					System.out.println("Qual nota deseja dar para: " + m.getNome());
+					avaliacao = scan.nextInt();
+					while(avaliacao > 10 || avaliacao < 0) {
+						System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
+						avaliacao = scan.nextInt();
+					}
+					notas.put(m, avaliacao);
+				}
+				else{
+					Integer a = notas.get(m);
+					System.out.println("Deseja atualizar a nota da mídia: " + m.getNome() + "\n a nota atual é: " + a);
+					System.out.println("1- Sim \n 2- Não");
+					avaliacao = scan.nextInt();
+
+					if (avaliacao == 1 ) {
+						System.out.println("Qual será a nova nota?");
+						avaliacao = scan.nextInt();
+
+						while(avaliacao > 10 || avaliacao < 0) {
+							System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
+							avaliacao = scan.nextInt();
+						}
+
+						notas.replace(m, a, avaliacao);
+					}
+				} 
+			}
+			else {
+				System.err.println("Sua lista de mídias vistas está vazia, veja alguma mídia para que seja possível avaliar algo");
+			}
+		}
+
+		scan.close();
+		
 	}
+
+	public Integer notaDaMidia(Midia m){
+
+		if(notas.containsKey(m)){
+			return notas.get(m);
+		}
+
+		return -1;
+	}
+
+	public String toString(){
+		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
+	}
+	  
+}

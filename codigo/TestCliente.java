@@ -55,4 +55,19 @@ public class TestCliente{
 
     assertEquals(1, s1.getListaJaVista());
   }
+
+  @Test 
+  public void testAvaliacao(){
+    Midia m1 = new Midia("Hora de Aventura", Filme.GENEROS[0], Filme.IDIOMAS[0], 0, "23/10/2005", 0);
+    Cliente c1 = new Cliente("vinicius", "1234", "vinicius@gmail.com");
+
+    c1.adicionaNaListaParaVer(m1);
+    c1.registrarAudiencia(m1);
+
+    c1.avaliar(m1);
+
+    Integer result = c1.notaDaMidia(m1);
+
+    assertEquals("", 8, result, 0);
+  }
 }
