@@ -1,16 +1,15 @@
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
-/**
- *Classe que representa um Cliente de uma plataforma de streaming.
-*/
 public class Cliente {
 		
 		private String nomeDeUsuario;
 		private String senha;
 		private String login;
 		private Lista<Midia> listaParaVer;
-		private Lista<Midia> listaJaVista;
+		private HashMap<Midia,LocalDate> listaJaVista;
 		private HashMap<Midia, Integer> notas;
 		
 		public Cliente(String nomeDeUsuario, String senha, String login) {
@@ -18,7 +17,7 @@ public class Cliente {
 			this.senha = senha;
 			this.login = login;
 			this.listaParaVer = new Lista<Midia>();
-			this.listaJaVista = new Lista<Midia>();
+			this.listaJaVista = new HashMap<Midia,LocalDate>();
 			this.notas = new HashMap<Midia, Integer>();
 		}
 
@@ -54,37 +53,26 @@ public class Cliente {
 			this.listaParaVer = listaParaVer;
 		}
 		
-		public Lista<Midia> getListaJaVista() {
+		public HashMap<Midia,LocalDate> getListaJaVista() {
 			return listaJaVista;
 		}
 		
-		public void setListaJaVista(Lista<Midia> listaJaVista) {
+		public void setListaJaVista(HashMap<Midia,LocalDate> listaJaVista) {
 			this.listaJaVista = listaJaVista;
 		}
 
-		/**
-		 * Adiciona na lista de assistir no futuro
-		*/
+		
 		public void adicionaNaListaParaVer(Midia serie) {
 			listaParaVer.add(serie);
 		}
-		/**
-		 * Adiciona na lista de séries já vistas
-		*/
 		public void adicionaNaListaVistas(Midia serie) {
 			listaParaVer.add(serie);
 		}
-		/**
-		 * Retira da lista de assistir futuramente, mídia foi assistida
-		*/
-		public void retirarDaLista(String nomeDaMidia) {
+			
+			public void retirarDaLista(String nomeDaMidia) {
 			listaParaVer.removeS(nomeDaMidia);
 		}
-	        /**
-		 * Filtra a Lista por gênero
-		 @param genero O gênero pelo qual a lista vai ser filtrada
-		 @return A lista filtrada
-		*/
+		
 	  public Lista<Midia> filtrarPorGenero(String genero) {
 	    Lista<Midia> listaFiltrada = new Lista<Midia>();
 	    
@@ -94,43 +82,41 @@ public class Cliente {
 	        }
 	    }
 
-	    for (Midia s : listaJaVista.allElements(new Midia[0])) {
-	        if (s.getGenero().equalsIgnoreCase(genero)) {
-	            listaFiltrada.add(s);
+	    for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+	        Midia midia = s.getKey();
+	        LocalDate data = s.getValue();
+	        if (midia.getGenero().equalsIgnoreCase(genero)) {
+	            listaFiltrada.add(midia);
 	        }
 	    }
 	    
 	    return listaFiltrada;
 	}
-		 /**
-		 * Filtra a Lista por idioma
-		 @param genero O idioma pelo qual a lista vai ser filtrada
-		 @return A lista filtrada
-		*/
+
 	  public Lista<Midia> filtrarPorIdioma(String idioma) {
-	    Lista<Midia> resultado = new Lista<>();
-	    Midia[] todasMidias = null;
-	    Midia[] jaVista = null;
-	    jaVista = this.listaJaVista.allElements(jaVista);
-	    todasMidias = this.listaParaVer.allElements(todasMidias);
-	    for(int i =0; i<this.listaParaVer.size();i++){
-	      if(todasMidias[i].getIdioma().equals(idioma)){
-	        resultado.add(todasMidias[i]);
-	      }
-	    }
-	    for(int i =0; i<this.listaJaVista.size();i++){
-	      if(jaVista[i].getIdioma().equals(idioma)){
-	        resultado.add(jaVista[i]);
-	      }
-	    }
-	    return resultado;
-	  }
+		    Lista<Midia> resultado = new Lista<>();
+		    Midia[] todasMidias = null;
+		    todasMidias = this.listaParaVer.allElements(todasMidias);
+		    for (int i = 0; i < this.listaParaVer.size(); i++) {
+		        if (todasMidias[i].getIdioma().equals(idioma)) {
+		            resultado.add(todasMidias[i]);
+		        }
+		    }
+		    for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+		        Midia midia = s.getKey();
+		        LocalDate data = s.getValue();
+		        if (midia.getIdioma().equals(idioma)) {
+		            resultado.add(midia);
+		        }
+		    }
+		    return resultado;
+		}
+
 
 	  /**
-	   * Filtra a Lista por quantidade de episódios
-	   @param qtdEpisodios O número (int) de episódios pelo qual a lista vai ser filtrada
-	   @return A lista filtrada
-	  */
+	   * verifica todas as series r
+	   * @param serie indica a serie para ser registrada
+	   */
 	  public Lista<Midia> filtrarPorQtdEpisodios(int qtdEpisodios) {
 	    Lista<Midia> resultado = new Lista<>();
 
@@ -161,16 +147,13 @@ public class Cliente {
 	     */
 	  public void registrarAudiencia(Midia m) {
 	    listaParaVer.removeS(m.getNome());
-	    listaJaVista.add(m);
+	    listaJaVista.put(m,LocalDate.now());
 	    m.registrarAudiencia();
 	    
 	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
 	  }
 	  
-	/**
-	 Método responsável por avaliar uma mídia.
-	 @param mid - Objeto do tipo Midia que será avaliado
-	*/
+	
 	public void avaliar(Midia mid) {
 		Midia[] midias = new Midia[listaJaVista.size()];
 		midias = listaJaVista.allElements(midias);
@@ -216,11 +199,7 @@ public class Cliente {
 		scan.close();
 		
 	}
-	/**
-	 Retorna a nota atribuída a uma determinada mídia.
-	 @param m a mídia cuja nota será consultada.
-	 @return a nota atribuída à mídia, ou -1 se a mídia ainda não foi avaliada.
-	*/
+
 	public Integer notaDaMidia(Midia m){
 
 		if(notas.containsKey(m)){
@@ -229,12 +208,25 @@ public class Cliente {
 
 		return -1;
 	}
-	/**
-	 Retorna uma representação em String do objeto da classe Usuario contendo o nome e login do usuário.
-	 @return uma String no formato "Nome: [nome do usuário]\nLogin: [login do usuário]"
-	*/
+
 	public String toString(){
 		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
 	}
 	  
+	public boolean isEspecialista() {
+		int cont =0;
+		for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+	        Midia midia = s.getKey();
+	        LocalDate data = s.getValue();
+	        LocalDate umMes = LocalDate.now().minusMonths(1);
+	        if(data.isBefore(umMes)) {
+	        	cont++;
+	        }
+	    }
+		if(cont >=5) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
