@@ -1,4 +1,7 @@
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.*;
 public class Midia {
 
 	private String nome;
@@ -7,7 +10,8 @@ public class Midia {
 	private int audiencia;
 	private String dataLancamento;
 	private int id;
-
+	private HashMap<Cliente, Avaliacao> notas;
+	
 	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
 		this.genero = genero;
@@ -82,5 +86,21 @@ public class Midia {
                 "Audiência: " + getAudiencia() + "\n" +
                 "Data de Lançamento: " + getDataLancamento() + "\n";
     }
+	
+	
+	public Boolean avaliar(Cliente c, Avaliacao avaliacao) {
+		
+		//Verifica se o cliente não esta na hash, caso positivo ele só avalia novamente a mídia, caso negativo , ele é inserido na mídia
+		if (!notas.containsKey(c) ) {
+			notas.put(c, avaliacao);
+			return true;
+		}else {
+				//Verificar como conseguir o valor antigo da avaliacao
+				notas.replace(c, avaliacao, avaliacao);
+				return true;
+			}
+		
+	}
+	
 
 }
