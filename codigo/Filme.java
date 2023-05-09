@@ -1,11 +1,32 @@
 
 import java.util.Random;
-
+**/
+ *Classe que representa um Filme, uma subclasse de Midia.
+ *Contém métodos e atributos específicos de filmes.
+*/
 public class Filme extends Midia {
+	/**
+	 *Os gêneros possíveis para um filme.
+	*/
 	static final String[] GENEROS = { "romance", "acao", "comedia" };
+	/**
+	 *Os idiomas disponíveis para um filme.
+	*/
 	static final String[] IDIOMAS = { "PT-BR", "PT-PG", "ENG" };
+	/**
+	 *A duração do filme em segundos.
+	*/
 	private int duracaoSeg;
-
+	/**
+	 *Construtor da classe Filme.
+	 *@param nome o nome do filme.
+	 *@param genero o gênero do filme.
+	 *@param idioma o idioma do filme.
+	 *@param duracaoSeg a duração do filme em segundos.
+	 *@param audiencia a audiência do filme.
+	 *@param idFilme o id do filme.
+	 *@param dataLancamento a data de lançamento do filme.
+	*/
 	public Filme(String nome, String genero, String idioma, int duracaoSeg, int audiencia, int idFilme,
 			String dataLancamento) {
 		super(nome, genero, idioma, audiencia, dataLancamento, idFilme);
@@ -16,7 +37,11 @@ public class Filme extends Midia {
 	public void setDuracaoSeg(int duracaoSeg) {
 		this.duracaoSeg = duracaoSeg;
 	}
-
+	/**
+	 *Método que carrega um filme a partir de uma linha de texto em um arquivo.	
+	 *@param linha a linha de texto a ser carregada.
+	 *@return o objeto Filme correspondente à linha de texto.
+	*/
 	public static Filme carregaFilme(String linha) {
 		
 		String regex = ";";
