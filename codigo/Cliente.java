@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ *Classe que representa um Cliente de uma plataforma de streaming.
+*/
 public class Cliente {
 		
 		private String nomeDeUsuario;
@@ -59,18 +62,29 @@ public class Cliente {
 			this.listaJaVista = listaJaVista;
 		}
 
-		
+		/**
+		 * Adiciona na lista de assistir no futuro
+		*/
 		public void adicionaNaListaParaVer(Midia serie) {
 			listaParaVer.add(serie);
 		}
+		/**
+		 * Adiciona na lista de séries já vistas
+		*/
 		public void adicionaNaListaVistas(Midia serie) {
 			listaParaVer.add(serie);
 		}
-			
-			public void retirarDaLista(String nomeDaMidia) {
+		/**
+		 * Retira da lista de assistir futuramente, mídia foi assistida
+		*/
+		public void retirarDaLista(String nomeDaMidia) {
 			listaParaVer.removeS(nomeDaMidia);
 		}
-		
+	        /**
+		 * Filtra a Lista por gênero
+		 @param genero O gênero pelo qual a lista vai ser filtrada
+		 @return A lista filtrada
+		*/
 	  public Lista<Midia> filtrarPorGenero(String genero) {
 	    Lista<Midia> listaFiltrada = new Lista<Midia>();
 	    
@@ -88,7 +102,11 @@ public class Cliente {
 	    
 	    return listaFiltrada;
 	}
-
+		 /**
+		 * Filtra a Lista por idioma
+		 @param genero O idioma pelo qual a lista vai ser filtrada
+		 @return A lista filtrada
+		*/
 	  public Lista<Midia> filtrarPorIdioma(String idioma) {
 	    Lista<Midia> resultado = new Lista<>();
 	    Midia[] todasMidias = null;
@@ -109,9 +127,10 @@ public class Cliente {
 	  }
 
 	  /**
-	   * verifica todas as series r
-	   * @param serie indica a serie para ser registrada
-	   */
+	   * Filtra a Lista por quantidade de episódios
+	   @param qtdEpisodios O número (int) de episódios pelo qual a lista vai ser filtrada
+	   @return A lista filtrada
+	  */
 	  public Lista<Midia> filtrarPorQtdEpisodios(int qtdEpisodios) {
 	    Lista<Midia> resultado = new Lista<>();
 
@@ -148,7 +167,10 @@ public class Cliente {
 	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
 	  }
 	  
-	
+	/**
+	 Método responsável por avaliar uma mídia.
+	 @param mid - Objeto do tipo Midia que será avaliado
+	*/
 	public void avaliar(Midia mid) {
 		Midia[] midias = new Midia[listaJaVista.size()];
 		midias = listaJaVista.allElements(midias);
@@ -194,7 +216,11 @@ public class Cliente {
 		scan.close();
 		
 	}
-
+	/**
+	 Retorna a nota atribuída a uma determinada mídia.
+	 @param m a mídia cuja nota será consultada.
+	 @return a nota atribuída à mídia, ou -1 se a mídia ainda não foi avaliada.
+	*/
 	public Integer notaDaMidia(Midia m){
 
 		if(notas.containsKey(m)){
@@ -203,7 +229,10 @@ public class Cliente {
 
 		return -1;
 	}
-
+	/**
+	 Retorna uma representação em String do objeto da classe Usuario contendo o nome e login do usuário.
+	 @return uma String no formato "Nome: [nome do usuário]\nLogin: [login do usuário]"
+	*/
 	public String toString(){
 		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
 	}
