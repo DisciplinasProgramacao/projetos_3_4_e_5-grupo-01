@@ -1,3 +1,4 @@
+import java.security.Key;
 import java.util.HashMap;
 
 
@@ -25,6 +26,10 @@ public class PlataformaStreaming{
 		return midia;
 	}
 
+	public Boolean existeMidia(String key){
+		return midia.containsKey(key);
+	}
+
 	public void setSeries(HashMap<String, Midia> midia) {
 		this.midia = midia;
 	}
@@ -32,6 +37,8 @@ public class PlataformaStreaming{
 	public HashMap<String, Cliente> getClientes() {
 		return clientes;
 	}
+
+
 	public void setClientes(HashMap<String, Cliente> clientes) {
 		this.clientes = clientes;
 	}
@@ -48,16 +55,16 @@ public class PlataformaStreaming{
      * @param nomeUsuario indica o nome do usuario
      * @param senha indica a senha do usuario
      */
-	public Cliente login(String nomeUsuario, String senha) {
+	public boolean login(String login, String senha) {
 		for (Cliente c : clientes.values()) {
-			if (c.getNomeDeUsuario().equals(nomeUsuario) && c.getSenha().equals(senha)) {
+			if (c.getLogin().equals(login) && c.getSenha().equals(senha)) {
 				
 				setClienteAtual(c);
-				return c;
+				return true;
 			}
 		}
 		
-		return null;
+		return false;
 		
 	}
 	

@@ -1,7 +1,4 @@
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.*;
 public class Midia {
 
 	private String nome;
@@ -19,6 +16,7 @@ public class Midia {
 		this.audiencia = audiencia;
 		this.dataLancamento = dataLancamento;
 		this.id = id;
+		this.notas = new HashMap<Cliente, Avaliacao>();
 	}
 
 	public String getNome() {
@@ -95,10 +93,11 @@ public class Midia {
 			notas.put(c, avaliacao);
 			return true;
 		}else {
-				//Verificar como conseguir o valor antigo da avaliacao
-				notas.replace(c, avaliacao, avaliacao);
-				return true;
-			}
+			//Verificar como conseguir o valor antigo da avaliacao
+			Avaliacao avaliacaoAntiga = notas.get(c);
+			notas.replace(c, avaliacaoAntiga, avaliacao);
+			return true;
+		}
 		
 	}
 	

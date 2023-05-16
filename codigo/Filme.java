@@ -1,6 +1,6 @@
 
 import java.util.Random;
-**/
+/**
  *Classe que representa um Filme, uma subclasse de Midia.
  *Contém métodos e atributos específicos de filmes.
 */

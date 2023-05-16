@@ -2,8 +2,8 @@
 import java.util.Random;
 
 public class Serie extends Midia{
-	private static final String[] GENEROS = {"romance", "acao", "comedia"};
-	private static final String[] IDIOMAS = {"PT-BR", "PT-PG", "ENG"};
+	static final String[] GENEROS = {"romance", "acao", "comedia"};
+	static final String[] IDIOMAS = {"PT-BR", "PT-PG", "ENG"};
 	private int quantidadeEpisodios;
   
 	public Serie(String nome, String genero, String idioma, int quantidadeEpisodios, int audiencia, int idSerie, String dataLancamento) {
