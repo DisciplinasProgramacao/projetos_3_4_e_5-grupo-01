@@ -88,18 +88,19 @@ public class Midia {
     }
 	
 	
+		/**
+     * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
+     * @param c indica o cliente que fez a avaliação
+     * @param avaliacao indica a avaliação feita pelo cliente
+     */
 	public Boolean avaliar(Cliente c, Avaliacao avaliacao) {
-		
-		//Verifica se o cliente não esta na hash, caso positivo ele só avalia novamente a mídia, caso negativo , ele é inserido na mídia
 		if (!notas.containsKey(c) ) {
 			notas.put(c, avaliacao);
 			return true;
 		}else {
-				//Verificar como conseguir o valor antigo da avaliacao
-				notas.replace(c, avaliacao, avaliacao);
+				notas.replace(c, avaliacao);
 				return true;
 			}
-		
 	}
 	
 
