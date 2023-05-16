@@ -93,52 +93,63 @@ public class Cliente {
 	    return listaFiltrada;
 	}
 
-	  public Lista<Midia> filtrarPorIdioma(String idioma) {
-		    Lista<Midia> resultado = new Lista<>();
-		    Midia[] todasMidias = null;
-		    todasMidias = this.listaParaVer.allElements(todasMidias);
-		    for (int i = 0; i < this.listaParaVer.size(); i++) {
-		        if (todasMidias[i].getIdioma().equals(idioma)) {
-		            resultado.add(todasMidias[i]);
-		        }
-		    }
-		    for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
-		        Midia midia = s.getKey();
-		        LocalDate data = s.getValue();
-		        if (midia.getIdioma().equals(idioma)) {
-		            resultado.add(midia);
-		        }
-		    }
-		    return resultado;
+	  public Lista<Midia> filtrarPorIdioma(String idioma) throws Exception {
+		  try {
+			  Lista<Midia> resultado = new Lista<>();
+			    Midia[] todasMidias = null;
+			    todasMidias = this.listaParaVer.allElements(todasMidias);
+			    for (int i = 0; i < this.listaParaVer.size(); i++) {
+			        if (todasMidias[i].getIdioma().equals(idioma)) {
+			            resultado.add(todasMidias[i]);
+			        }
+			    }
+			    for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+			        Midia midia = s.getKey();
+			        LocalDate data = s.getValue();
+			        if (midia.getIdioma().equals(idioma)) {
+			            resultado.add(midia);
+			        }
+			    }
+			    return resultado;
+		  }catch (Exception e) {
+			throw new Exception("Unexpected erro");
+		}
+		    
 		}
 
 
 	  /**
 	   * verifica todas as series r
 	   * @param serie indica a serie para ser registrada
+	 * @throws Exception 
 	   */
-	  public Lista<Midia> filtrarPorQtdEpisodios(int qtdEpisodios) {
-	    Lista<Midia> resultado = new Lista<>();
+	  public Lista<Midia> filtrarPorQtdEpisodios(int qtdEpisodios) throws Exception {
+		  try {
+			  Lista<Midia> resultado = new Lista<>();
 
-	    Midia[] paraVer = null;
-	    paraVer = this.listaParaVer.allElements(paraVer);
+			    Midia[] paraVer = null;
+			    paraVer = this.listaParaVer.allElements(paraVer);
+			    
+			    for(int i = 0; i < this.listaParaVer.size(); i++){
+			      if(((Serie) paraVer[i]).getQuantidadeEpisodios() == qtdEpisodios){
+			        resultado.add(paraVer[i]);
+			      }
+			    }
+
+			    Midia[] jaVista = null;
+			    jaVista = this.listaParaVer.allElements(jaVista);
+			    
+			    for(int i = 0; i < this.listaJaVista.size(); i++){
+			      if(((Serie) jaVista[i]).getQuantidadeEpisodios() == qtdEpisodios){
+			        resultado.add(jaVista[i]);
+			      }
+			    }
+
+			    return resultado;
+		  }catch (Exception e) {
+			  throw new Exception("Unexpected error");
+		}
 	    
-	    for(int i = 0; i < this.listaParaVer.size(); i++){
-	      if(((Serie) paraVer[i]).getQuantidadeEpisodios() == qtdEpisodios){
-	        resultado.add(paraVer[i]);
-	      }
-	    }
-
-	    Midia[] jaVista = null;
-	    jaVista = this.listaParaVer.allElements(jaVista);
-	    
-	    for(int i = 0; i < this.listaJaVista.size(); i++){
-	      if(((Serie) jaVista[i]).getQuantidadeEpisodios() == qtdEpisodios){
-	        resultado.add(jaVista[i]);
-	      }
-	    }
-
-	    return resultado;
 	  }
 
 	  /**
@@ -154,52 +165,6 @@ public class Cliente {
 	  }
 	  
 	
-	public void avaliar(Midia mid) {
-		Midia[] midias = new Midia[listaJaVista.size()];
-		midias = listaJaVista.allElements(midias);
-		int avaliacao;
-		Scanner scan = new Scanner( System.in );
-		
-		for (Midia m: midias) {
-			if(m.getId() == mid.getId()) {
-
-				if(!notas.containsKey(m)){
-					System.out.println("Qual nota deseja dar para: " + m.getNome());
-					avaliacao = scan.nextInt();
-					while(avaliacao > 10 || avaliacao < 0) {
-						System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
-						avaliacao = scan.nextInt();
-					}
-					notas.put(m, avaliacao);
-				}
-				else{
-					Integer a = notas.get(m);
-					System.out.println("Deseja atualizar a nota da mídia: " + m.getNome() + "\n a nota atual é: " + a);
-					System.out.println("1- Sim \n 2- Não");
-					avaliacao = scan.nextInt();
-
-					if (avaliacao == 1 ) {
-						System.out.println("Qual será a nova nota?");
-						avaliacao = scan.nextInt();
-
-						while(avaliacao > 10 || avaliacao < 0) {
-							System.out.println("A avaliação deve ser um número entre 0 e 10, por favor tente novamente");
-							avaliacao = scan.nextInt();
-						}
-
-						notas.replace(m, a, avaliacao);
-					}
-				} 
-			}
-			else {
-				System.err.println("Sua lista de mídias vistas está vazia, veja alguma mídia para que seja possível avaliar algo");
-			}
-		}
-
-		scan.close();
-		
-	}
-
 	public Integer notaDaMidia(Midia m){
 
 		if(notas.containsKey(m)){
@@ -213,20 +178,24 @@ public class Cliente {
 		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
 	}
 	  
-	public boolean isEspecialista() {
-		int cont =0;
-		for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
-	        Midia midia = s.getKey();
-	        LocalDate data = s.getValue();
-	        LocalDate umMes = LocalDate.now().minusMonths(1);
-	        if(data.isBefore(umMes)) {
-	        	cont++;
-	        }
-	    }
-		if(cont >=5) {
-			return true;
-		}else {
-			return false;
+	public boolean isEspecialista() throws Exception {
+		try {
+			int cont =0;
+			for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+		        Midia midia = s.getKey();
+		        LocalDate data = s.getValue();
+		        LocalDate umMes = LocalDate.now().minusMonths(1);
+		        if(data.isAfter(umMes)) {
+		        	cont++;
+		        }
+		    }
+			if(cont >=5) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e) {
+			throw new Exception("Unexpected error");
 		}
 	}
 }
