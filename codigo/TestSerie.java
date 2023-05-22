@@ -7,7 +7,7 @@ public class TestSerie{
   
   @BeforeEach
 	void setUp() throws Exception {
-   s1 = new Serie("Serie teste1", "Drama" , "Português" , 5 , 0);
+   s1 = new Serie("Serie teste1", "Drama" , "Português" , 5 , 0, 1, "01/1/2000");
   }
 
   @Test
