@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -117,9 +114,9 @@ public static void main(String[] args) throws FileNotFoundException {
                 if(opcao == 1){
                     System.out.println("Qual é o nome do filme?");
                     String nome = scanner.nextLine();
-                    System.out.println("Genero: 1 - romance | 2 - acao | 3 - comedia");
+                    System.out.println("Genero: 0 - romance | 1 - acao | 2 - comedia");
                     String genero = scanner.nextLine();
-                    System.out.println("Idiomas: 1 - PT-BR | 2 - PT-PG | 3 - ENG");
+                    System.out.println("Idiomas: 0 - PT-BR | 1 - PT-PG | 2 - ENG");
                     String idioma = scanner.nextLine();
                     System.out.println("Data de lançamento: dd/mm/yyyy");
                     String data = scanner.nextLine();
@@ -133,14 +130,29 @@ public static void main(String[] args) throws FileNotFoundException {
 
                     app.adicionarMidia(new Filme(nome, Filme.GENEROS[Integer.parseInt(genero)], Filme.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(duracao), 0, id, data));
 
+                    try {
+                        // Cria um FileWriter com o modo de append
+                        FileWriter fileWriter = new FileWriter("filmes.txt", true);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                        // Escreve o conteúdo no arquivo
+                        bufferedWriter.newLine();
+                        bufferedWriter.write( id+";"+nome+";"+data+";"+duracao);
+
+                        // Fecha o BufferedWriter
+                        bufferedWriter.close();
+                    } catch (IOException e) {
+                        System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
+                    }
                     System.out.println("Filme adicionado com sucesso");
                 }
+
                 else if(opcao ==2){
                     System.out.println("Qual é o nome do série?");
                     String nome = scanner.nextLine();
-                    System.out.println("Genero: 1 - romance | 2 - acao | 3 - comedia");
+                    System.out.println("Genero: 0 - romance | 1 - acao | 2 - comedia");
                     String genero = scanner.nextLine();
-                    System.out.println("Idiomas: 1 - PT-BR | 2 - PT-PG | 3 - ENG");
+                    System.out.println("Idiomas: 0 - PT-BR | 1 - PT-PG | 2 - ENG");
                     String idioma = scanner.nextLine();
                     System.out.println("Data de lançamento: dd/mm/yyyy");
                     String data = scanner.nextLine();
@@ -152,6 +164,21 @@ public static void main(String[] args) throws FileNotFoundException {
                     }
 
                     app.adicionarMidia(new Serie(nome, Serie.GENEROS[Integer.parseInt(genero)], Serie.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(eps), 0, id, data));
+
+                    try {
+                        // Cria um FileWriter com o modo de append
+                        FileWriter fileWriter = new FileWriter("series.txt", true);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                        // Escreve o conteúdo no arquivo
+                        bufferedWriter.newLine();
+                        bufferedWriter.write( id+";"+nome+";"+data);
+
+                        // Fecha o BufferedWriter
+                        bufferedWriter.close();
+                    } catch (IOException e) {
+                        System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
+                    }
 
                     System.out.println("Série adicionado com sucesso");
                 }
@@ -169,6 +196,21 @@ public static void main(String[] args) throws FileNotFoundException {
                 String login = scanner.nextLine();
 
                 app.adicionarCliente(new Cliente(nome, senha, login));
+
+                try {
+                    // Cria um FileWriter com o modo de append
+                    FileWriter fileWriter = new FileWriter("espectadores.txt", true);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                    // Escreve o conteúdo no arquivo
+                    bufferedWriter.newLine();
+                    bufferedWriter.write(nome+";"+login+";"+senha);
+
+                    // Fecha o BufferedWriter
+                    bufferedWriter.close();
+                } catch (IOException e) {
+                    System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
+                }
 
                 System.out.println("Cliente Adicionado com sucesso");
 
