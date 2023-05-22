@@ -15,6 +15,10 @@ public class PlataformaStreaming{
 		this.clientes = new HashMap<String, Cliente>();
 		this.clienteAtual = clienteAtual;
 	}
+	public PlataformaStreaming() {
+		this.midia = new HashMap<String, Midia>();
+		this.clientes = new HashMap<String, Cliente>();
+	}
 
 	public String getNome() {
 		return nome;

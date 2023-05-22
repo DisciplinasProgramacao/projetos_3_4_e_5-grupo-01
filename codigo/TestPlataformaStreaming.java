@@ -4,6 +4,7 @@ import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class TestPlataformaStreaming {
     private PlataformaStreaming plataforma;
@@ -12,42 +13,42 @@ public class TestPlataformaStreaming {
     public void setUp() {
         plataforma = new PlataformaStreaming();
         plataforma.setNome("Minha Plataforma");
-        plataforma.setSeries(new HashMap<String, Serie>());
+        plataforma.setSeries(new HashMap<String, Midia>());
         plataforma.setClientes(new HashMap<String, Cliente>());
     }
 
     @Test
     public void testLogin() {
-        Cliente cliente1 = new Cliente("joao123", "senha123");
-        Cliente cliente2 = new Cliente("maria456", "senha456");
+        Cliente cliente1 = new Cliente("joao123", "senha123", "login");
+        Cliente cliente2 = new Cliente("maria456", "senha456", "login2");
         plataforma.adicionarCliente(cliente1);
         plataforma.adicionarCliente(cliente2);
 
-        Cliente clienteLogado = plataforma.login("joao123", "senha123");
-        assertNotNull(clienteLogado);
+        boolean clienteLogado = plataforma.login("login", "senha123");
+        assertTrue(clienteLogado);
         assertEquals(cliente1, plataforma.getClienteAtual());
 
-        clienteLogado = plataforma.login("maria456", "senha456");
-        assertNotNull(clienteLogado);
+        clienteLogado = plataforma.login("login2", "senha456");
+        assertTrue(clienteLogado);
         assertEquals(cliente2, plataforma.getClienteAtual());
 
-        clienteLogado = plataforma.login("joao123", "senha456");
-        assertNull(clienteLogado);
+        clienteLogado = plataforma.login("login", "senha456");
+        assertFalse(clienteLogado);
         assertNull(plataforma.getClienteAtual());
     }
 
     @Test
     public void testAdicionarSerie() {
-        Serie serie1 = new Serie("Serie 1", "Genero 1", "Idioma 1", 10, 0);
-        Serie serie2 = new Serie("Serie 2", "Genero 2", "Idioma 2", 20, 0);
+        Serie serie1 = new Serie("Serie 1", "Genero 1", "Idioma 1", 10, 0, 1, "01/1/2000");
+        Serie serie2 = new Serie("Serie 2", "Genero 2", "Idioma 2", 20, 0, 2, "10/10/2010");
 
-        plataforma.adicionarSerie(serie1);
-        assertEquals(1, plataforma.getSeries().size());
-        assertEquals(serie1, plataforma.getSeries().get("Serie 1"));
+        plataforma.adicionarMidia(serie1);
+        assertEquals(1, plataforma.getMidia().size());
+        assertEquals(serie1, plataforma.getMidia().get("Serie 1"));
 
-        plataforma.adicionarSerie(serie2);
-        assertEquals(2, plataforma.getSeries().size());
-        assertEquals(serie2, plataforma.getSeries().get("Serie 2"));
+        plataforma.adicionarMidia(serie2);
+        assertEquals(2, plataforma.getMidia().size());
+        assertEquals(serie2, plataforma.getMidia().get("Serie 2"));
     }
 
     @Test
@@ -66,44 +67,44 @@ public class TestPlataformaStreaming {
     
     @Test
     public void testFiltrarPorGenero() {
-        Serie s1 = new Serie("The Crown", "drama", "inglês", 10);
-        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20);
-        plataforma.getSeries().put("1", s1);
-        plataforma.getSeries().put("2", s2);
+        Serie s1 = new Serie("The Crown", "drama", "inglês", 10, 1, 0, "12/12/2012");
+        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20, 1, 2, "17/02/2004");
+        plataforma.getMidia().put("1", s1);
+        plataforma.getMidia().put("2", s2);
 
-        Lista<Serie> listaFiltrada = plataforma.filtrarPorGenero("drama");
+        Lista<Midia> listaFiltrada = plataforma.filtrarPorGenero("drama");
 
         assertEquals(1, listaFiltrada.size());
     }
 
     @Test
     public void testFiltrarPorIdioma() {
-        Serie s1 = new Serie("The Crown", "drama", "inglês", 10);
-        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20);
-        plataforma.getSeries().put("1", s1);
-        plataforma.getSeries().put("2", s2);
+        Serie s1 = new Serie("The Crown", "drama", "inglês", 10, 1, 0, "12/12/2012");
+        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20, 1, 2, "17/02/2004");
+        plataforma.getMidia().put("1", s1);
+        plataforma.getMidia().put("2", s2);
 
-        Lista<Serie> listaFiltrada = plataforma.filtrarPorIdioma("inglês");
+        Lista<Midia> listaFiltrada = plataforma.filtrarPorIdioma("inglês");
 
         assertEquals(2, listaFiltrada.size());
     }
 
     @Test
     public void testFiltrarPorQtdEpisodios() {
-        Serie s1 = new Serie("The Crown", "drama", "inglês", 10);
-        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20);
-        plataforma.getSeries().put("1", s1);
-        plataforma.getSeries().put("2", s2);
+        Serie s1 = new Serie("The Crown", "drama", "inglês", 10, 1, 0, "12/12/2012");
+        Serie s2 = new Serie("Stranger Things", "ficção", "inglês", 20, 1, 2, "17/02/2004");
+        plataforma.getMidia().put("1", s1);
+        plataforma.getMidia().put("2", s2);
 
-        Lista<Serie> listaFiltrada = plataforma.filtrarPorQtdEpisodios(10);
+        Lista<Midia> listaFiltrada = plataforma.filtrarPorQtdEpisodios(10);
 
         assertEquals(1, listaFiltrada.size());
     }
 
     @Test
     public void testRegistrarAudiencia() {
-        Serie s1 = new Serie("The Crown", "drama", "inglês", 10);
-        plataforma.getSeries().put("1", s1);
+        Serie s1 = new Serie("The Crown", "drama", "inglês", 10, 1, 0, "12/12/2012");
+        plataforma.getMidia().put("1", s1);
 
         plataforma.registrarAudiencia(s1);
         assertEquals(1, s1.getAudiencia());
