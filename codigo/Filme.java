@@ -34,6 +34,10 @@ public class Filme extends Midia {
 
 	}
 
+	public int getDuracaoSeg() {
+		return duracaoSeg;
+	}
+
 	public void setDuracaoSeg(int duracaoSeg) {
 		this.duracaoSeg = duracaoSeg;
 	}
@@ -76,10 +80,6 @@ public class Filme extends Midia {
 		// 	return filme;
 		// }
 		return null;
-	}
-
-	public int getDuracaoSeg() {
-		return duracaoSeg;
 	}
 
 	
