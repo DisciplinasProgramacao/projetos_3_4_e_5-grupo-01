@@ -104,5 +104,27 @@ public class Midia {
 		
 	}
 	
+		
+	/**
+     * Calcula a média de notas dessa mídia
+     */
+	public double calcMedia() {
+		
+		double soma = 0;
+		int quantidade = 0;
+		
+		for(Avaliacao a : notas.values()) {
+			soma += a.getNota();
+			quantidade++;
+		}
+		
+		 if (quantidade > 0) {
+		        return soma / quantidade;
+		    } else {
+		        return 0;
+		    }
+		
+	}
+	
 
 }
