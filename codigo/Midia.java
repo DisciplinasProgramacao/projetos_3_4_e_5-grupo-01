@@ -18,6 +18,10 @@ public class Midia {
 		this.id = id;
 		this.notas = new HashMap<Cliente, Avaliacao>();
 	}
+	
+	public HashMap<Cliente, Avaliacao> getNotas() {
+		return notas;
+	} 
 
 	public String getNome() {
 		return nome;
