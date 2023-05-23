@@ -8,6 +8,7 @@ public class Midia {
 	private String dataLancamento;
 	private int id;
 	private HashMap<Cliente, Avaliacao> notas;
+	private boolean lancamento;
 	
 	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
@@ -17,6 +18,15 @@ public class Midia {
 		this.dataLancamento = dataLancamento;
 		this.id = id;
 		this.notas = new HashMap<Cliente, Avaliacao>();
+		this.lancamento = false;
+	}
+	
+	public boolean getLancamento() {
+		return lancamento;
+	}
+	
+	public void setLancamento(boolean lancamento) {
+		this.lancamento = lancamento;
 	}
 	
 	public HashMap<Cliente, Avaliacao> getNotas() {
