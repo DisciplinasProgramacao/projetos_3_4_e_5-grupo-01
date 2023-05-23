@@ -11,14 +11,23 @@ public class Cliente {
 		private Lista<Midia> listaParaVer;
 		private HashMap<Midia,LocalDate> listaJaVista;
 		private HashMap<Midia, Integer> notas;
+		private boolean profissional;
 		
-		public Cliente(String nomeDeUsuario, String senha, String login, Lista<Midia> listaParaVer) {
+		public Cliente(String nomeDeUsuario, String senha, String login) {
 			this.nomeDeUsuario = nomeDeUsuario;
 			this.senha = senha;
 			this.login = login;
 			this.listaParaVer = new Lista<Midia>();
 			this.listaJaVista = new HashMap<Midia,LocalDate>();
-			this.notas = new HashMap<Midia, Integer>();
+			this.profissional = false;
+		}
+
+		public boolean getProfissional() {
+			return profissional;
+		}
+		
+		public void setProfissional(boolean profissional) {
+			this.profissional = profissional;
 		}
 
 		public String getLogin() {
