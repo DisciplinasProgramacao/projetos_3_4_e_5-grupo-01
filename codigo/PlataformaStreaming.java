@@ -222,6 +222,14 @@ public class PlataformaStreaming{
 
 			
 		}
+		//terminar em casa
+		@SuppressWarnings("unchecked")
+	public Lista<Midia> melhoresMidias() {
+		((Collection<Midia>) midia).stream()
+								   .filter(mid -> mid.getNotas() > 100)
+								   .forEach(mid -> System.out.println(mid));
+								   
+	}
 	}
 
 }
