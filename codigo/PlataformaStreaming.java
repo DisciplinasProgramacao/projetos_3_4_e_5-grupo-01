@@ -231,5 +231,41 @@ public class PlataformaStreaming{
 								   
 	}
 	}
+	
+	/**
+	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
+	 * 
+	 * @return mapaClientes Filtra e retorna uma Hashmap com o cliente que mais assistiu mídias e o número de mídias que ele assistiu
+	 */
+	public HashMap<Integer, Cliente> clienteMaisAssistiuMidiasNumMidias() {
+		int nMidias = 0, auxNumMidias;
+		Cliente auxCliente = null;
+		HashMap<Integer, Cliente> mapaClientes = new HashMap();
+		for (Cliente c : getClientes().values()) {
+			auxNumMidias = c.getListaJaVista().size();
+
+			if (auxNumMidias > nMidias) {
+				nMidias = auxNumMidias;
+				auxCliente = c;
+			}
+		}
+		mapaClientes.put(nMidias, auxCliente);
+		return mapaClientes;
+	}
+	
+	//finalizar em casa, tem que fazer um forEach midia, encontrar o cliente na midia pra saber quantas vezes ele fez avaliacoes
+	public HashMap<Integer, Cliente> clienteMaisAvaliouNumAvaliacoes(){
+		int nAvaliacoes = 0, auxNumAvaliacoes;
+		Cliente auxCliente = null;
+		HashMap<Integer, Cliente> mapaClientes = new HashMap();
+		for (Midia m : getMidia().values()) {
+			auxNumAvaliacoes = m.get;
+
+			if (auxNumAvaliacoes > nAvaliacoes) {
+				nAvaliacoes = auxNumAvaliacoes;
+				auxCliente = c;
+			}
+		}
+	}
 
 }
