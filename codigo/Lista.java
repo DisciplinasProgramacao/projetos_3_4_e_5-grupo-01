@@ -23,6 +23,8 @@ import java.util.LinkedList;
  * SOFTWARE.
  */
 
+import org.junit.validator.PublicClassValidator;
+
  /** Classe para encapsular uma lista duplamente encadeada */
 public class Lista<T> {
 
@@ -34,6 +36,11 @@ public class Lista<T> {
     public Lista() {
         this.data = new LinkedList<>();
     }
+    
+    // public  get(int indice){
+
+    //     return data.get(indice);
+    // }
 
     /**
      * Adiciona um elemento no final da lista. Retorna TRUE se foi possível adicionar. 

@@ -12,7 +12,7 @@ public class Cliente {
 		private HashMap<Midia,LocalDate> listaJaVista;
 		private HashMap<Midia, Integer> notas;
 		
-		public Cliente(String nomeDeUsuario, String senha, String login) {
+		public Cliente(String nomeDeUsuario, String senha, String login, Lista<Midia> listaParaVer) {
 			this.nomeDeUsuario = nomeDeUsuario;
 			this.senha = senha;
 			this.login = login;

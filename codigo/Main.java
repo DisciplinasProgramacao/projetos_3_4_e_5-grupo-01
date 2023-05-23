@@ -1,10 +1,21 @@
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.plaf.synth.SynthToggleButtonUI;
 
 class Main {
+
+    // TODO: ao criar um novo cliente, adicionar todas as midias em sua lista para ver
+    // TODO: permitir cliente filtrar midias
+    // TODO: cliente assiste midia e registra audiencia
+    // TODO: cliente avalia midia já assistida
+    // 
+
+    
 public static void main(String[] args) throws FileNotFoundException {
 
 
@@ -96,18 +107,21 @@ public static void main(String[] args) throws FileNotFoundException {
 
         switch (opcao) {
             case 1:
+                //listar todas midias
                 for (String chave : app.getMidia().keySet()) {
                     Midia instancia = app.getMidia().get(chave);
                     System.out.println(instancia.toString());
                 }
                 break;
             case 2:
+                // listar todos clientes
                 for (String chave : app.getClientes().keySet()) {
                     Cliente instancia = app.getClientes().get(chave);
                     System.out.println(instancia.toString());
                 }
                 break;
             case 3:
+                //adicionar nova midia
                 System.out.println("Deseja Adicionar um filme ou serie? (1-filme/2-serie)");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
@@ -141,10 +155,11 @@ public static void main(String[] args) throws FileNotFoundException {
 
                         // Fecha o BufferedWriter
                         bufferedWriter.close();
+                        System.out.println("Filme adicionado com sucesso");
                     } catch (IOException e) {
                         System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
                     }
-                    System.out.println("Filme adicionado com sucesso");
+                    
                 }
 
                 else if(opcao ==2){
@@ -176,24 +191,36 @@ public static void main(String[] args) throws FileNotFoundException {
 
                         // Fecha o BufferedWriter
                         bufferedWriter.close();
+                        System.out.println("Série adicionado com sucesso");
                     } catch (IOException e) {
                         System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
                     }
 
-                    System.out.println("Série adicionado com sucesso");
+                  
                 }
                 else{
                     System.out.println("Opção Inválida");
                 }
                 break;
-            case 4:
+            case 4: 
+                //cadastrar novo cliente
                 scanner.nextLine();
                 System.out.println("Qual é o nome do Cliente?");
                 String nome = scanner.nextLine();
-                System.out.println("Qual é a senha do Cliente?");
-                String senha = scanner.nextLine();
                 System.out.println("Qual é o login do Cliente?");
                 String login = scanner.nextLine();
+                System.out.println("Qual é a senha do Cliente?");
+                String senha = scanner.nextLine();
+                
+
+                Lista<Midia> listaParaVer = new Lista<>(app.getMidia().size())
+
+                List<Integer> listaValores = new ArrayList<>(mapa.values());
+
+                // Imprimir a lista de valores
+                for (Integer valor : listaValores) {
+                    System.out.println(valor);
+                }
 
                 app.adicionarCliente(new Cliente(nome, senha, login));
 
@@ -208,23 +235,23 @@ public static void main(String[] args) throws FileNotFoundException {
 
                     // Fecha o BufferedWriter
                     bufferedWriter.close();
+                    System.out.println("Cliente Adicionado com sucesso");
                 } catch (IOException e) {
                     System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
                 }
 
-                System.out.println("Cliente Adicionado com sucesso");
-
 
                 break;
             case 5:
-
+                //fazer login
 
                 scanner.nextLine();
 
-                System.out.println("Qual é a senha do Cliente?");
-                senha = scanner.nextLine();
                 System.out.println("Qual é o login do Cliente?");
                 login = scanner.nextLine();
+                System.out.println("Qual é a senha do Cliente?");
+                senha = scanner.nextLine();
+                
 
                 Boolean validacao = app.login(login, senha);
 
@@ -239,7 +266,17 @@ public static void main(String[] args) throws FileNotFoundException {
                 }
 
                 if(validacao){
-                    System.out.println("Login com sucesso");
+                    System.out.println("Login com sucesso\nSeja bem vindo(a) " + app.getClienteAtual().getNomeDeUsuario());
+
+                    try {
+                        perfil(app);
+                    } catch (Exception e) {
+                        System.out.println("Houve um erro em sua conta, tente novamente mais tarde, você foi desconectado");
+                        app.setClienteAtual(null);
+                        System.out.println(e);
+                    }
+
+                    System.out.println("Logout feito com sucesso");
                 }
                 else{
                     System.out.println("Houve um erro no login");
@@ -256,7 +293,47 @@ public static void main(String[] args) throws FileNotFoundException {
     
     }
 
-
+    
 
 }
+
+public static void perfil(PlataformaStreaming app) throws Exception{
+    Scanner scanner = new Scanner(System.in);
+    Cliente user = app.getClienteAtual();
+
+    while(true){
+        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n0 - Logout");
+        int opt = scanner.nextInt();
+
+        if(opt == 1){
+
+            Midia[] arr = new Midia[user.getListaParaVer().size()];
+            arr = user.getListaParaVer().allElements(arr);
+            System.out.println(arr.length);
+
+            for(Midia m : arr){
+                System.out.println(m.toString() + "\n");
+            }
+            
+        }
+        else if(opt == 2){
+
+            for (Map.Entry<Midia, LocalDate> m : user.getListaJaVista().entrySet()) {
+                Midia mJaAssistida = m.getKey();
+                // LocalDate diaDaView = m.getValue();
+                System.out.println(mJaAssistida.toString() + "\n");
+            }
+            
+        }
+        else if(opt == 0){
+            break;
+        }
+        else{
+            System.out.println("Opção inválida");
+        }
+    }
+
+    return;
+}
+
 }
