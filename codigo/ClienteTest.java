@@ -1,12 +1,14 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class TestCliente{
+import org.junit.Before;
+
+public class ClienteTest{
 
   Serie s1;
   Cliente c1;
   
-  @BeforeEach
+  @Before
 	void setUp() throws Exception {
    s1 = new Serie ("Serie teste1", "Drama" , "Português" , 5 , 0, 0, "1/10/2020");
    c1 = new Cliente("Cliente teste1", "1234", "login");

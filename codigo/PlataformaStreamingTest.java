@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-public class TestPlataformaStreaming {
+public class PlataformaStreamingTest {
     private PlataformaStreaming plataforma;
 
     @Before

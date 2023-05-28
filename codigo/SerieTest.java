@@ -1,13 +1,13 @@
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 
-public class TestSerie{
+public class SerieTest{
 
   Serie s1;
   
-  @BeforeEach
+  @Before
 	void setUp() throws Exception {
    s1 = new Serie("Serie teste1", "Drama" , "Português" , 5 , 0, 1, "01/1/2000");
   }

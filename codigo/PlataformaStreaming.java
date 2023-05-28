@@ -1,5 +1,7 @@
 import java.security.Key;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.*;
 
 
 public class PlataformaStreaming{
@@ -223,13 +225,11 @@ public class PlataformaStreaming{
 			
 		}
 		//terminar em casa
-		@SuppressWarnings("unchecked")
-	public Lista<Midia> melhoresMidias() {
-		((Collection<Midia>) midia).stream()
-								   .filter(mid -> mid.getNotas() > 100)
-								   .forEach(mid -> System.out.println(mid));
-								   
-	}
+	public List<Midia> melhoresMidias() {
+		List <Midia> midias = new ArrayList<Midia>();
+		midias  = midias.stream()
+				.filter(m -> m.getNotas().size() >= 100)
+				.collect(Collectors.toList());
 	}
 	
 	/**
