@@ -23,7 +23,6 @@ import java.util.LinkedList;
  * SOFTWARE.
  */
 
-import org.junit.validator.PublicClassValidator;
 
  /** Classe para encapsular uma lista duplamente encadeada */
 public class Lista<T> {

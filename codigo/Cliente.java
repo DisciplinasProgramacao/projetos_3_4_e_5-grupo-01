@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -166,11 +169,26 @@ public class Cliente {
 	     * @param serie indica a serie para ser registrada
 	     */
 	  public void registrarAudiencia(Midia m) {
+		LocalDate dataAtual = LocalDate.now();
 	    listaParaVer.removeS(m.getNome());
-	    listaJaVista.put(m,LocalDate.now());
+	    listaJaVista.put(m, dataAtual);
 	    m.registrarAudiencia();
-	    
-	    //verificar a série na hash de séries de "PlataformaStraming", caso ela exisa executa tudo  
+
+		try {
+			// Cria um FileWriter com o modo de append
+			FileWriter fileWriter = new FileWriter("audiencia.txt", true);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+			// Escreve o conteúdo no arquivo
+			bufferedWriter.newLine();
+			bufferedWriter.write(this.login+";"+"A"+";"+m.getId());
+
+			// Fecha o BufferedWriter
+			bufferedWriter.close();
+		} catch (IOException e) {
+			System.out.println("Ocorreu um erro ao registrar sua audiencia: " + e.getMessage());
+		}
+ 
 	  }
 	  
 	

@@ -8,11 +8,11 @@ public class Filme extends Midia {
 	/**
 	 *Os gêneros possíveis para um filme.
 	*/
-	static final String[] GENEROS = { "romance", "acao", "comedia" };
+	public static final String[] GENEROS = { "romance", "acao", "comedia" };
 	/**
 	 *Os idiomas disponíveis para um filme.
 	*/
-	static final String[] IDIOMAS = { "PT-BR", "PT-PG", "ENG" };
+	public static final String[] IDIOMAS = { "PT-BR", "PT-PG", "ENG" };
 	/**
 	 *A duração do filme em segundos.
 	*/

@@ -5,17 +5,16 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.plaf.synth.SynthToggleButtonUI;
 
 class Main {
 
     // TODO: DONE! ao criar um novo cliente, adicionar todas as midias em sua lista para ver
 
-    // TODO: Quando ler os arquivos, os objetos dos clientes deverão receber seus respectivos conteúdos em suas listas para ver e já assitido
+    // TODO: DONE! Quando ler os arquivos, os objetos dos clientes deverão receber seus respectivos conteúdos em suas listas para ver e já assitido
 
-    // TODO: permitir cliente filtrar midias
+    // TODO: DONE! permitir cliente filtrar midias
 
-    // TODO: cliente assiste midia e registra audiencia
+    // TODO: DONE! cliente assiste midia e registra audiencia
 
     // TODO: cliente avalia midia já assistida 
 
@@ -70,7 +69,7 @@ public static void main(String[] args) throws FileNotFoundException {
         reader.readLine();
         while ((linha = reader.readLine()) != null) {
             // System.out.println(linha);
-
+            
             app.carregaEspectador(linha);
         }
     } catch (IOException e) {
@@ -308,7 +307,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
     Cliente user = app.getClienteAtual();
 
     while(true){
-        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n3 - Filtrar por Quantidade de Epsodios\n4 - Filtrar Por Gênero\n5 - Filtrar por Idioma\n0 - Logout");
+        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n3 - Filtrar por Quantidade de Epsodios\n4 - Filtrar Por Gênero\n5 - Filtrar por Idioma\n6 - Assistir Alguma Midia\n7 - Avaliar Mídia\n0 - Logout");
         int opt = scanner.nextInt();
 
         if(opt == 1){
@@ -348,7 +347,10 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                 System.out.println(arr.length);
 
                 for(Midia m : arr){
-                    System.out.println(m.toString() + "\n");
+                    if(m != null){
+                        System.out.println(m.toString() + "\n");
+                    }
+                    
                 }
             }
 
@@ -359,7 +361,8 @@ public static void perfil(PlataformaStreaming app) throws Exception{
             try {
                 int genero = scanner.nextInt();
                 if(genero == 1 || genero == 2 || genero == 3){
-                    Lista<Midia> resultado = user.filtrarPorGenero(Filme.GENEROS[genero]);
+                    String gen = Filme.GENEROS[genero];
+                    Lista<Midia> resultado = user.filtrarPorGenero(gen);
 
                     Midia[] arr = new Midia[user.getListaParaVer().size()];
                     arr = resultado.allElements(arr);
@@ -412,6 +415,25 @@ public static void perfil(PlataformaStreaming app) throws Exception{
             } catch (Exception e) {
                 // TODO: handle exception
                 System.out.println("Idioma Inválido" + e);
+            }
+        }
+        else if(opt == 6){
+            System.out.println("Digite o ID da mídia que deseja assistir");
+            
+            try {
+                scanner.nextLine();
+                String id = scanner.nextLine();
+                Midia m = app.getMidiaEspecifica(id);
+
+                if(m != null){
+                    System.out.println("Audiência registrada");
+                    user.registrarAudiencia(m);
+                }
+                else{
+                    System.out.println("Essa mídia não foi encontrada");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
             }
         }
         else if(opt == 0){

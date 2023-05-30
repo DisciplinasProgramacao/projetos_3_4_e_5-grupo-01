@@ -1,4 +1,5 @@
 import java.security.Key;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.*;
@@ -80,6 +81,11 @@ public class PlataformaStreaming{
      */
 	public void adicionarMidia(Midia midia) {
 		this.midia.put(Integer.toString(midia.getId()), midia);
+	}
+
+	public Midia getMidiaEspecifica(String id){
+		Midia m = this.midia.get(id);
+		return m;
 	}
 	
 	/**
@@ -188,6 +194,9 @@ public class PlataformaStreaming{
 
 			// Cliente c = clientes.get(login);
 			Cliente c = new Cliente(nome, senha, login);
+			this.midia.forEach((key, value) ->{
+				c.adicionaNaListaParaVer(value);
+			});
 
 			clientes.put(login, c);
 		}
@@ -211,13 +220,13 @@ public class PlataformaStreaming{
 
 				if(m != null){
 					Cliente c = clientes.get(login);
-
-					if (jaVisto.equals("F")) { //nao assitido
-						c.adicionaNaListaParaVer(m);
-
-					} else if (jaVisto.equals("A")) { //ja assistido
-						c.adicionaNaListaVistas(m);
+					if (jaVisto.equals("A")) { //ja assistido
+						// c.adicionaNaListaVistas(m);
+						// m.registrarAudiencia();
+						c.getListaParaVer().removeS(m.getNome());
+						c.getListaJaVista().put(m, LocalDate.now());
 						m.registrarAudiencia();
+						// c.registrarAudiencia(m);
 					}	
 				}
 
