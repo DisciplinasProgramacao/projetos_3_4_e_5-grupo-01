@@ -307,7 +307,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
     Cliente user = app.getClienteAtual();
 
     while(true){
-        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n3 - Filtrar por Quantidade de Epsodios\n4 - Filtrar Por Gênero\n5 - Filtrar por Idioma\n6 - Assistir Alguma Midia\n7 - Avaliar Mídia\n0 - Logout");
+        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n3 - Filtrar por Quantidade de Epsodios\n4 - Filtrar Por Gênero\n5 - Filtrar por Idioma\n6 - Assistir Alguma Midia\n7 - Avaliar Mídia\n8 - Minhas Avaliações\n0 - Logout");
         int opt = scanner.nextInt();
 
         if(opt == 1){
@@ -434,7 +434,95 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                 }
             } catch (Exception e) {
                 // TODO: handle exception
+                System.out.println("Não foi possível assistir essa mídia.");
+                System.out.println(e);
             }
+        }
+        else if(opt == 7){
+            System.out.println("Digite o ID da mídia que deseja avaliar (Você precisa ter assistido ela antes):");
+
+            try {
+                scanner.nextLine();
+                String id = scanner.nextLine();
+
+                Midia m = app.getMidiaEspecifica(id);
+
+                if(m != null){
+                    
+                    LocalDate diaAssistido = user.jaAssistiu(m);
+                    if(diaAssistido != null){
+                        float nota = -1;
+                        while(true){
+                            System.out.println("Qual nota você deseja dar? 1 - 5");
+                            try {
+                                nota = scanner.nextFloat();
+                            } catch (Exception e) {
+                                // TODO: handle exception
+                                System.out.println("Valor inválido");
+                            }
+                            
+
+                            if(nota >= 0 && nota <= 5){
+                                break;
+                            }
+                            else{
+                                System.out.println("Valor inválido");
+                            }
+                        }
+
+                        System.out.println("Deixe um comentário, caso contrário deixe em branco.");
+                        scanner.nextLine();
+                        String desc = scanner.nextLine();
+
+                        LocalDate diaAtual = LocalDate.now();
+                        Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
+                        
+                        m.avaliar(user, avaliacao);
+                        System.out.println("Avaliação feita com sucesso.");
+
+                        try {
+                            FileWriter fileWriter = new FileWriter("avaliacoes.txt", true);
+                            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        
+                            bufferedWriter.newLine();
+                            bufferedWriter.write(user.getLogin()+";"+m.getId()+";"+nota+";"+desc+";"+diaAtual.toString());
+        
+                            bufferedWriter.close();
+                        } catch (IOException e) {
+                            System.out.println("Ocorreu um erro ao adicionar conteúdo ao arquivo: " + e.getMessage());
+                        }
+                    }
+                    else{
+                        System.out.println("Você não assistiu ainda essa mídia, tente assisti-lá para depois fazer sua avaliação");
+                    }
+                }
+                else{
+                    System.out.println("Essa mídia não foi encontrada");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println(e);
+            }
+        }
+        else if(opt == 8){
+            //minhas avalicações
+            try {
+                user.getListaJaVista().forEach((key, value) -> {
+                    key.getNotas().forEach((keyNota, valueNota) -> {
+                        if(keyNota.getLogin() == user.getLogin()){
+                            System.out.println("Mídia: "+key.getNome());
+                            System.out.println(valueNota.toString());
+                        }
+                    });
+                });
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("Não foi possível buscar suas avaliações");
+                System.out.println(e);
+            }
+            
+
+
         }
         else if(opt == 0){
             break;

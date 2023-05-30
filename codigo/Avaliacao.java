@@ -5,6 +5,12 @@ public class Avaliacao {
 	private String comentario;
 	private String data;
 	
+	public Avaliacao(float nota, String comentario, String data) {
+		this.nota = nota;
+		this.comentario = comentario;
+		this.data = data;
+	}
+
 	public float getNota() {
 		return nota;
 	}
@@ -23,5 +29,14 @@ public class Avaliacao {
 	public void setData(String data) {
 		this.data = data;
 	}
+
+	@Override
+    public String toString() {
+        return "Avaliacao {" +
+                "nota=" + nota +
+                ", comentario='" + comentario + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
 	
 }

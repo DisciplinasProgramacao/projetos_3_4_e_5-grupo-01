@@ -8,6 +8,9 @@ public class Midia {
 	private String dataLancamento;
 	private int id;
 	private HashMap<Cliente, Avaliacao> notas;
+	
+
+
 	private boolean lancamento;
 	
 	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
@@ -88,6 +91,8 @@ public class Midia {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	
 
 	public String toString() {
         return "Mídia:\n" +

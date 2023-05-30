@@ -85,6 +85,11 @@ public class Cliente {
 			listaParaVer.removeS(nomeDaMidia);
 		}
 		
+		public LocalDate jaAssistiu(Midia m){
+
+			return listaJaVista.get(m);
+		}
+		
 	  public Lista<Midia> filtrarPorGenero(String genero) {
 	    Lista<Midia> listaFiltrada = new Lista<Midia>();
 	    
