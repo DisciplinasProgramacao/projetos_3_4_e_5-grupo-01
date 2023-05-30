@@ -9,11 +9,15 @@ import javax.swing.plaf.synth.SynthToggleButtonUI;
 
 class Main {
 
-    // TODO: ao criar um novo cliente, adicionar todas as midias em sua lista para ver
+    // TODO: DONE! ao criar um novo cliente, adicionar todas as midias em sua lista para ver
+
+    // TODO: Quando ler os arquivos, os objetos dos clientes deverão receber seus respectivos conteúdos em suas listas para ver e já assitido
+
     // TODO: permitir cliente filtrar midias
+
     // TODO: cliente assiste midia e registra audiencia
-    // TODO: cliente avalia midia já assistida
-    // 
+
+    // TODO: cliente avalia midia já assistida 
 
     
 public static void main(String[] args) throws FileNotFoundException {
@@ -58,6 +62,7 @@ public static void main(String[] args) throws FileNotFoundException {
     }
     
 
+    //subindo arquivos de clientes
     try {
         reader = new BufferedReader(new FileReader("espectadores.txt"));
         String linha;
@@ -73,6 +78,7 @@ public static void main(String[] args) throws FileNotFoundException {
     }
 
 
+    //subindo arquivos de audiencia
     try {
         reader = new BufferedReader(new FileReader("audiencia.txt"));
         String linha;
@@ -213,16 +219,16 @@ public static void main(String[] args) throws FileNotFoundException {
                 String senha = scanner.nextLine();
                 
 
-                Lista<Midia> listaParaVer = new Lista<>(app.getMidia().size())
+                //add midias na lista para ver do cliente
+                Cliente cliente = new Cliente(nome, senha, login);
 
-                List<Integer> listaValores = new ArrayList<>(mapa.values());
+                app.getMidia().forEach((key, value) -> {
+                    cliente.adicionaNaListaParaVer(value);
+                    System.out.println(value.getNome());
+                });
 
-                // Imprimir a lista de valores
-                for (Integer valor : listaValores) {
-                    System.out.println(valor);
-                }
 
-                app.adicionarCliente(new Cliente(nome, senha, login));
+                app.adicionarCliente(cliente);
 
                 try {
                     // Cria um FileWriter com o modo de append
@@ -302,7 +308,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
     Cliente user = app.getClienteAtual();
 
     while(true){
-        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n0 - Logout");
+        System.out.println("Qual operação deseja fazer?\n1 - Lista de Para ver\n2 - Lista de já assistidos\n3 - Filtrar por Quantidade de Epsodios\n4 - Filtrar Por Gênero\n5 - Filtrar por Idioma\n0 - Logout");
         int opt = scanner.nextInt();
 
         if(opt == 1){
@@ -324,6 +330,89 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                 System.out.println(mJaAssistida.toString() + "\n");
             }
             
+        }
+        else if(opt == 3){
+            //filtragem por quantidade de ep
+            System.out.println("Digite a quantidade de ep que deseja buscar:");
+            int qtdEp = scanner.nextInt();
+
+            Lista<Midia> resultado = app.filtrarPorQtdEpisodios(qtdEp);
+
+            Midia[] arr = new Midia[user.getListaParaVer().size()];
+            arr = resultado.allElements(arr);
+
+            if(arr == null){
+                System.out.println("Nenhuma Mídia foi encontrada");
+            }
+            else{
+                System.out.println(arr.length);
+
+                for(Midia m : arr){
+                    System.out.println(m.toString() + "\n");
+                }
+            }
+
+        }
+        else if(opt == 4){
+            //filtragem por genero
+            System.out.println("1 - Comedia\n2 - Romance\n3 - Ação");
+            try {
+                int genero = scanner.nextInt();
+                if(genero == 1 || genero == 2 || genero == 3){
+                    Lista<Midia> resultado = user.filtrarPorGenero(Filme.GENEROS[genero]);
+
+                    Midia[] arr = new Midia[user.getListaParaVer().size()];
+                    arr = resultado.allElements(arr);
+        
+                    if(arr == null){
+                        System.out.println("Nenhuma Mídia foi encontrada");
+                    }
+                    else{
+                        System.out.println(arr.length);
+        
+                        for(Midia m : arr){
+                            System.out.println(m.toString() + "\n");
+                        }
+                    }
+                }
+                else{
+                    System.out.println("Genero Inválido");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("Genero Inválido");
+            }
+        
+        }
+        else if(opt == 5){
+            //filtragem por idioma
+            System.out.println("1 - PT-BR\n2 - PT-PG\n3 - ENG");
+            try {
+                int idioma = scanner.nextInt();
+                if(idioma == 1 || idioma == 2 || idioma == 3){
+                    Lista<Midia> resultado = user.filtrarPorGenero(Filme.GENEROS[idioma]);
+
+                    Midia[] arr = new Midia[user.getListaParaVer().size()];
+                    arr = resultado.allElements(arr);
+        
+                    if(arr == null){
+                        System.out.println("Nenhuma Mídia foi encontrada");
+                    }
+                    else{
+                        System.out.println(arr.length);
+        
+                        for(Midia m : arr){
+                            System.out.println(m.toString() + "\n");
+                        }
+                    }
+                }
+                else{
+                    System.out.println("Idioma Inválido");
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("Idioma Inválido" + e);
+            }
         }
         else if(opt == 0){
             break;

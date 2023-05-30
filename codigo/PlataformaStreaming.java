@@ -132,9 +132,15 @@ public class PlataformaStreaming{
 		public Lista<Midia> filtrarPorQtdEpisodios(int quantEpisodios) {
 			Lista<Midia> listaFiltrada = new Lista<Midia>();
 			for (Midia m : midia.values()) {
-				if (((Serie) m).getQuantidadeEpisodios() == quantEpisodios) {
-					listaFiltrada.add(m);
+				if(m instanceof Serie){
+					if(((Serie) m).getQuantidadeEpisodios() == quantEpisodios){
+						listaFiltrada.add(m);
+					}
 				}
+			}
+
+			if(listaFiltrada.size() == 0){
+				return null;
 			}
 
 			return listaFiltrada;
@@ -216,21 +222,24 @@ public class PlataformaStreaming{
 				}
 
 				return;
-				
 			} catch (Exception e){
 				System.out.println(e);
 				return;
 			}
+			
+		}
 
 			
 		}
 		//terminar em casa
+	/*
 	public List<Midia> melhoresMidias() {
 		List <Midia> midias = new ArrayList<Midia>();
 		midias  = midias.stream()
 				.filter(m -> m.getNotas().size() >= 100)
 				.collect(Collectors.toList());
 	}
+	*/
 	
 	/**
 	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
@@ -254,6 +263,7 @@ public class PlataformaStreaming{
 	}
 	
 	//finalizar em casa, tem que fazer um forEach midia, encontrar o cliente na midia pra saber quantas vezes ele fez avaliacoes
+	/* 
 	public HashMap<Integer, Cliente> clienteMaisAvaliouNumAvaliacoes(){
 		int nAvaliacoes = 0, auxNumAvaliacoes;
 		Cliente auxCliente = null;
@@ -267,5 +277,6 @@ public class PlataformaStreaming{
 			}
 		}
 	}
+	*/
 
 }

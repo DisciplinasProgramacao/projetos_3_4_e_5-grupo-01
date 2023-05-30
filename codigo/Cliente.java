@@ -71,11 +71,11 @@ public class Cliente {
 		}
 
 		
-		public void adicionaNaListaParaVer(Midia serie) {
-			listaParaVer.add(serie);
+		public void adicionaNaListaParaVer(Midia m) {
+			listaParaVer.add(m);
 		}
-		public void adicionaNaListaVistas(Midia serie) {
-			listaParaVer.add(serie);
+		public void adicionaNaListaVistas(Midia m) {
+			listaParaVer.add(m);
 		}
 			
 			public void retirarDaLista(String nomeDaMidia) {
