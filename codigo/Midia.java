@@ -100,7 +100,7 @@ public class Midia {
     }
 	
 	
-		/**
+	/**
      * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
      * @param c indica o cliente que fez a avaliação
      * @param avaliacao indica a avaliação feita pelo cliente
@@ -110,12 +110,9 @@ public class Midia {
 			notas.put(c, avaliacao);
 			return true;
 		}else {
-			//Verificar como conseguir o valor antigo da avaliacao
-			Avaliacao avaliacaoAntiga = notas.get(c);
-			notas.replace(c, avaliacaoAntiga, avaliacao);
-			return true;
-		}
-		
+				notas.replace(c, avaliacao);
+				return true;
+			}
 	}
 	
 		
