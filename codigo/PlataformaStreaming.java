@@ -241,14 +241,21 @@ public class PlataformaStreaming{
 			
 		}
 		//terminar em casa
-	/*
+	
 	public List<Midia> melhoresMidias() {
-		List <Midia> midias = new ArrayList<Midia>();
-		midias  = midias.stream()
+		List <Midia> midiasMaior100 = new ArrayList<Midia>();
+		midiasMaior100 = midia.values().stream()
 				.filter(m -> m.getNotas().size() >= 100)
 				.collect(Collectors.toList());
+
+
+		List<Midia> top10 = midiasMaior100.stream()
+				.limit(10)
+				.collect(Collectors.toList());
+
+		return top10;
 	}
-	*/
+	
 	
 	/**
 	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
