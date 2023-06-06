@@ -256,6 +256,19 @@ public class PlataformaStreaming{
 		return top10;
 	}
 	
+	public List<Midia> maisVisualizacao() {
+		List <Midia> midiasMaior100 = new ArrayList<Midia>();
+		midiasMaior100 = midia.values().stream()
+				.filter(m -> m.getAudiencia() >= 100)
+				.collect(Collectors.toList());
+
+
+		List<Midia> top10 = midiasMaior100.stream()
+				.limit(10)
+				.collect(Collectors.toList());
+
+		return top10;
+	}
 	
 	/**
 	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
