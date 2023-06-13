@@ -3,8 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.Scanner;
+
+import excecoes.ClienteNaoProfissional;
 
 public class Cliente {
 		
@@ -31,6 +31,10 @@ public class Cliente {
 		
 		public void setProfissional(boolean profissional) {
 			this.profissional = profissional;
+		}
+
+		public void tornarProfissional(){
+			this.profissional = true;
 		}
 
 		public String getLogin() {
@@ -172,8 +176,14 @@ public class Cliente {
 	  /**
 	     * Verifica a existência dessa série, remove ela da listaPraVer do Cliente e a adiciona na listaJavistas do Cliente
 	     * @param serie indica a serie para ser registrada
+	 * @throws ClienteNaoProfissional
 	     */
-	  public void registrarAudiencia(Midia m) {
+	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissional {
+
+		if(!this.getProfissional()){
+			throw new ClienteNaoProfissional();
+		}
+
 		LocalDate dataAtual = LocalDate.now();
 	    listaParaVer.removeS(m.getNome());
 	    listaJaVista.put(m, dataAtual);

@@ -1,20 +1,17 @@
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
+
+import excecoes.ClienteNaoProfissional;
+
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 
 class Main {
 
-    // TODO: DONE! ao criar um novo cliente, adicionar todas as midias em sua lista para ver
-
-    // TODO: DONE! Quando ler os arquivos, os objetos dos clientes deverão receber seus respectivos conteúdos em suas listas para ver e já assitido
-
-    // TODO: DONE! permitir cliente filtrar midias
-
-    // TODO: DONE! cliente assiste midia e registra audiencia
+    // TODO: atualizar cadastro de midias de lançamento
+    // TODO: atualizar clientes profissionais
 
     // TODO: cliente avalia midia já assistida 
 
@@ -130,6 +127,10 @@ public static void main(String[] args) throws FileNotFoundException {
                 System.out.println("Deseja Adicionar um filme ou serie? (1-filme/2-serie)");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
+
+                System.out.println("Essa mídia é um lançamento? 1 - sim | 2 - não");
+                String lancamento = scanner.nextLine();
+
                 if(opcao == 1){
                     System.out.println("Qual é o nome do filme?");
                     String nome = scanner.nextLine();
@@ -147,7 +148,13 @@ public static void main(String[] args) throws FileNotFoundException {
                         id = random.nextInt(10);
                     }
 
-                    app.adicionarMidia(new Filme(nome, Filme.GENEROS[Integer.parseInt(genero)], Filme.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(duracao), 0, id, data));
+                    Filme filme = new Filme(nome, Filme.GENEROS[Integer.parseInt(genero)], Filme.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(duracao), 0, id, data);
+
+                    if(lancamento.equals("1")){
+                        filme.tornarLancamento();
+                    }
+
+                    app.adicionarMidia(filme);
 
                     try {
                         // Cria um FileWriter com o modo de append
@@ -166,7 +173,7 @@ public static void main(String[] args) throws FileNotFoundException {
                     }
                     
                 }
-
+                //midia é série
                 else if(opcao ==2){
                     System.out.println("Qual é o nome do série?");
                     String nome = scanner.nextLine();
@@ -183,7 +190,13 @@ public static void main(String[] args) throws FileNotFoundException {
                         id = random.nextInt(10);
                     }
 
-                    app.adicionarMidia(new Serie(nome, Serie.GENEROS[Integer.parseInt(genero)], Serie.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(eps), 0, id, data));
+                    Serie serie = new Serie(nome, Serie.GENEROS[Integer.parseInt(genero)], Serie.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(eps), 0, id, data);
+
+                    if(lancamento.equals("1")){
+                        serie.tornarLancamento();
+                    }
+
+                    app.adicionarMidia(serie);
 
                     try {
                         // Cria um FileWriter com o modo de append
@@ -209,6 +222,7 @@ public static void main(String[] args) throws FileNotFoundException {
                 break;
             case 4: 
                 //cadastrar novo cliente
+                
                 scanner.nextLine();
                 System.out.println("Qual é o nome do Cliente?");
                 String nome = scanner.nextLine();
@@ -216,14 +230,20 @@ public static void main(String[] args) throws FileNotFoundException {
                 String login = scanner.nextLine();
                 System.out.println("Qual é a senha do Cliente?");
                 String senha = scanner.nextLine();
+                System.out.println("O cliente é um profissional? 1-sim | 2-nao");
+                String profissional = scanner.nextLine();
                 
 
                 //add midias na lista para ver do cliente
                 Cliente cliente = new Cliente(nome, senha, login);
 
+                if(profissional.equals("1")){
+                    cliente.tornarProfissional();
+                }
+
                 app.getMidia().forEach((key, value) -> {
                     cliente.adicionaNaListaParaVer(value);
-                    System.out.println(value.getNome());
+                    // System.out.println(value.getNome());
                 });
 
 
@@ -295,11 +315,7 @@ public static void main(String[] args) throws FileNotFoundException {
                 System.out.println("Opção inválida!");
                 break;
         }
-    
     }
-
-    
-
 }
 
 public static void perfil(PlataformaStreaming app) throws Exception{
@@ -432,8 +448,11 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                 else{
                     System.out.println("Essa mídia não foi encontrada");
                 }
-            } catch (Exception e) {
-                // TODO: handle exception
+            }
+            catch(ClienteNaoProfissional e){
+                System.out.println(e.getMessage());
+            }
+            catch (Exception e) {
                 System.out.println("Não foi possível assistir essa mídia.");
                 System.out.println(e);
             }
@@ -499,8 +518,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                 else{
                     System.out.println("Essa mídia não foi encontrada");
                 }
-            } catch (Exception e) {
-                // TODO: handle exception
+            } catch (Exception e) {   
                 System.out.println(e);
             }
         }
@@ -516,7 +534,6 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                     });
                 });
             } catch (Exception e) {
-                // TODO: handle exception
                 System.out.println("Não foi possível buscar suas avaliações");
                 System.out.println(e);
             }

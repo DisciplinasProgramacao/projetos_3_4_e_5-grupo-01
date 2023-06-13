@@ -8,9 +8,6 @@ public class Midia {
 	private String dataLancamento;
 	private int id;
 	private HashMap<Cliente, Avaliacao> notas;
-	
-
-
 	private boolean lancamento;
 	
 	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
@@ -30,6 +27,10 @@ public class Midia {
 	
 	public void setLancamento(boolean lancamento) {
 		this.lancamento = lancamento;
+	}
+
+	public void tornarLancamento(){
+		this.lancamento = true;
 	}
 	
 	public HashMap<Cliente, Avaliacao> getNotas() {
@@ -68,8 +69,7 @@ public class Midia {
 		this.audiencia = audiencia;
 	}
 
-	// incrementa a audiencia da serie toda vez que ela for assistida por algum
-	// Cliente.
+	// incrementa a audiencia da serie toda vez que ela for assistida por algum Cliente.
 	public void registrarAudiencia() {
 
 		setAudiencia(getAudiencia() + 1);
@@ -135,10 +135,10 @@ public class Midia {
 		}
 		
 		 if (quantidade > 0) {
-		        return soma / quantidade;
-		    } else {
-		        return 0;
-		    }
+			return soma / quantidade;
+		} else {
+			return 0;
+		}
 		
 	}
 	

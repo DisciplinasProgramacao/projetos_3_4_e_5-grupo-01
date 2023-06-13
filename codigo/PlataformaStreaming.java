@@ -1,6 +1,4 @@
-import java.security.Key;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.*;
 
@@ -188,12 +186,17 @@ public class PlataformaStreaming{
 		if (linha != null) {
 			campos = linha.split(regex);
 		    String nome = campos[0];
-			// System.out.println(nome);
 			String login = campos[1];
 			String senha = campos[2];
 
-			// Cliente c = clientes.get(login);
 			Cliente c = new Cliente(nome, senha, login);
+			Random random = new Random();
+			int profissional = random.nextInt(100);
+
+			if(profissional < 20){
+				c.tornarProfissional();
+			}
+
 			this.midia.forEach((key, value) ->{
 				c.adicionaNaListaParaVer(value);
 			});
@@ -239,8 +242,7 @@ public class PlataformaStreaming{
 		}
 
 			
-		}
-		//terminar em casa
+	}
 	
 	public List<Midia> melhoresMidias() {
 		List <Midia> midiasMaior100 = new ArrayList<Midia>();
