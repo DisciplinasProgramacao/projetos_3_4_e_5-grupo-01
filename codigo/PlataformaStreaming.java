@@ -244,17 +244,22 @@ public class PlataformaStreaming{
 			
 	}
 	
-	public List<Midia> melhoresMidias() {
+		
+	public List<Midia> top10MidiasMelhorAvaliacao() {
 		List <Midia> midiasMaior100 = new ArrayList<Midia>();
 		midiasMaior100 = midia.values().stream()
-				.filter(m -> m.getNotas().size() >= 100)
+				.filter(m -> m.getNotas().size() >= 1)
 				.collect(Collectors.toList());
 
-
-		List<Midia> top10 = midiasMaior100.stream()
+// colocar em ordem decrescente
+		List <Midia> midiasOrdenadas = midiasMaior100.stream()
+				.sorted(Comparator.comparing(Midia::mediaAvaliacao))
+				.collect(Collectors.toList());
+				
+		List<Midia> top10 = midiasOrdenadas.stream()
 				.limit(10)
 				.collect(Collectors.toList());
-
+		
 		return top10;
 	}
 	
