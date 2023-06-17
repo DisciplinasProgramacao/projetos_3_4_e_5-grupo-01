@@ -8,7 +8,7 @@ public class Filme extends Midia {
 	/**
 	 *Os gêneros possíveis para um filme.
 	*/
-	public static final String[] GENEROS = { "romance", "acao", "comedia" };
+	//public static final String[] GENEROS = { "romance", "acao", "comedia" };
 	/**
 	 *Os idiomas disponíveis para um filme.
 	*/
@@ -27,11 +27,10 @@ public class Filme extends Midia {
 	 *@param idFilme o id do filme.
 	 *@param dataLancamento a data de lançamento do filme.
 	*/
-	public Filme(String nome, String genero, String idioma, int duracaoSeg, int audiencia, int idFilme,
-			String dataLancamento) {
-		super(nome, genero, idioma, audiencia, dataLancamento, idFilme);
-		this.duracaoSeg = duracaoSeg;
 
+	public Filme(String nome, Generos acao, String idioma, int duracao, int audiencia, int id, String dataLancamento) {
+		super(nome, nome, idioma, audiencia, dataLancamento, id);
+		this.duracaoSeg = duracaoSeg;
 	}
 
 	public int getDuracaoSeg() {
@@ -59,12 +58,11 @@ public class Filme extends Midia {
 			int duracao = Integer.parseInt(campos[3]);
 
 			Random random = new Random();
-			int genero = random.nextInt(3);
 			int idioma = random.nextInt(3);
 			// int duracao = random.nextInt(10800 - 3600 + 1) + 3600;
 			
 
-			Filme filme = new Filme(nome, GENEROS[genero], IDIOMAS[idioma], duracao, 0, id, dataLancamento);
+			Filme filme = new Filme(nome, Generos.ACAO, IDIOMAS[idioma], duracao, 0, id, dataLancamento);
 
 			return filme;
 		}

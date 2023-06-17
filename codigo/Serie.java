@@ -2,7 +2,6 @@
 import java.util.Random;
 
 public class Serie extends Midia{
-	static final String[] GENEROS = {"romance", "acao", "comedia"};
 	static final String[] IDIOMAS = {"PT-BR", "PT-PG", "ENG"};
 	private int quantidadeEpisodios;
   
@@ -12,6 +11,13 @@ public class Serie extends Midia{
 	}
   
 
+	public Serie(String nome, Generos policial, String idioma, int qtdEp, int audiencia, int id,
+			String dataLancamento) {
+				super(nome, nome, idioma, audiencia, dataLancamento, id);
+				this.quantidadeEpisodios = qtdEp;
+	}
+
+
 	public int getQuantidadeEpisodios() {
 		return quantidadeEpisodios;
 	}
@@ -19,12 +25,6 @@ public class Serie extends Midia{
 	public void setQuantidadeEpisodios(int quantidadeEpisodios) {
 		this.quantidadeEpisodios = quantidadeEpisodios;
 	}
-  
-  
-	public static String[] getGeneros() {
-		return GENEROS;
-	}
-
 
   public static Serie carregaSerie(String linha) {
         String regex = ";";
@@ -40,7 +40,6 @@ public class Serie extends Midia{
 				String dataLancamento = campos[2];
 
 				Random random = new Random();
-        		int genero = random.nextInt(3);
 				int idioma = random.nextInt(3);
 				int qtdEp = random.nextInt(24);
 
@@ -48,7 +47,7 @@ public class Serie extends Midia{
 
 				// Serie s = new Serie(nome, )
 
-                Serie serie = new Serie (nome, GENEROS[genero], IDIOMAS[idioma], qtdEp, 0, id, dataLancamento);
+                Serie serie = new Serie (nome, Generos.POLICIAL, IDIOMAS[idioma], qtdEp, 0, id, dataLancamento);
                 return serie;
             }
             return null;

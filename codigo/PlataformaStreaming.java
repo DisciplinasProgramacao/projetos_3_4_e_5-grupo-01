@@ -314,5 +314,13 @@ public class PlataformaStreaming{
 		}
 	}
 	*/
+	/*Arrumar um jeito de saber quantas midias o cliente avaliou*/
+	public int clientesMaisDe15Avaliacoes () {
+		int numClientesMaisDe15Avaliacoes = clientes.keySet().stream()
+											.filter(c -> c.getAvaliacoes() > 15)
+											.mapToInt(Cliente::getAvaliacoes);
+
+		return numClientesMaisDe15Avaliacoes;
+	}
 
 }

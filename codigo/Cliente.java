@@ -178,10 +178,10 @@ public class Cliente {
 	     * @param serie indica a serie para ser registrada
 	 * @throws ClienteNaoProfissional
 	     */
-	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissional {
+	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissionalException {
 
 		if(!this.getProfissional()){
-			throw new ClienteNaoProfissional();
+			throw new ClienteNaoProfissionalException();
 		}
 
 		LocalDate dataAtual = LocalDate.now();
