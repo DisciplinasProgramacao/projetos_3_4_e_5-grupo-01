@@ -1,4 +1,12 @@
+package test;
 import org.junit.Test;
+
+import Avaliacao;
+import Cliente;
+import Filme;
+import Midia;
+import Serie;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;

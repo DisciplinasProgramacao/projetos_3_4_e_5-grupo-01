@@ -37,6 +37,18 @@ public class Midia {
 		return notas;
 	} 
 
+	public void setNotas(HashMap<Cliente, Avaliacao> notas) {
+		this.notas = notas;
+	}
+
+	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) {
+        notas.put(cliente, avaliacao);
+    }
+
+	public boolean possuiAvaliacao(Cliente cliente) {
+        return notas.containsKey(cliente);
+    }
+
 	public String getNome() {
 		return nome;
 	}
@@ -92,8 +104,6 @@ public class Midia {
 		this.id = id;
 	}
 
-	
-
 	public String toString() {
         return "Mídia:\n" +
                 "ID: " + getId() + "\n" +
@@ -105,20 +115,22 @@ public class Midia {
     }
 	
 	
-	/**
-     * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
-     * @param c indica o cliente que fez a avaliação
-     * @param avaliacao indica a avaliação feita pelo cliente
-     */
-	public Boolean avaliar(Cliente c, Avaliacao avaliacao) {
-		if (!notas.containsKey(c) ) {
-			notas.put(c, avaliacao);
-			return true;
-		}else {
-				notas.replace(c, avaliacao);
-				return true;
-			}
-	}
+	// /**
+	//	MOVI O METODO AVALIAR DE LUGAR PORQUE É O CLIENTE QUE AVALIA
+	//
+    //  * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
+    //  * @param c indica o cliente que fez a avaliação
+    //  * @param avaliacao indica a avaliação feita pelo cliente
+    //  */
+	// public Boolean avaliar(Cliente c, Avaliacao avaliacao) {
+	// 	if (!notas.containsKey(c) ) {
+	// 		notas.put(c, avaliacao);
+	// 		return true;
+	// 	}else {
+	// 			notas.replace(c, avaliacao);
+	// 			return true;
+	// 		}
+	// }
 	
 		
 	/**

@@ -4,17 +4,22 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-import excecoes.ClienteNaoProfissional;
+import javax.sound.sampled.FloatControl;
 
-public class Cliente {
+import org.hamcrest.core.IsInstanceOf;
+
+import excecoes.ClienteNaoProfissional;
+import excecoes.midiaJaAvaliadaException;
+import excecoes.usuarioNaoPodeComentarException;
+
+public abstract class Cliente {
 		
 		private String nomeDeUsuario;
 		private String senha;
 		private String login;
 		private Lista<Midia> listaParaVer;
 		private HashMap<Midia,LocalDate> listaJaVista;
-		private HashMap<Midia, Integer> notas;
-		private boolean profissional;
+		private HashMap<Midia, Float> notas;
 		
 		public Cliente(String nomeDeUsuario, String senha, String login) {
 			this.nomeDeUsuario = nomeDeUsuario;
@@ -22,19 +27,6 @@ public class Cliente {
 			this.login = login;
 			this.listaParaVer = new Lista<Midia>();
 			this.listaJaVista = new HashMap<Midia,LocalDate>();
-			this.profissional = false;
-		}
-
-		public boolean getProfissional() {
-			return profissional;
-		}
-		
-		public void setProfissional(boolean profissional) {
-			this.profissional = profissional;
-		}
-
-		public void tornarProfissional(){
-			this.profissional = true;
 		}
 
 		public String getLogin() {
@@ -77,7 +69,19 @@ public class Cliente {
 			this.listaJaVista = listaJaVista;
 		}
 
+		public HashMap<Midia, Float> getNotas() {
+			return notas;
+		}
 		
+		public void setNotas(HashMap<Midia, Float> notas) {
+			this.notas = notas;
+		}
+
+		
+		public void adicionarAvaliacao(Midia midia, float i) {
+        	notas.put(midia, i);
+    	}	
+
 		public void adicionaNaListaParaVer(Midia m) {
 			listaParaVer.add(m);
 		}
@@ -180,7 +184,7 @@ public class Cliente {
 	     */
 	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissionalException {
 
-		if(!this.getProfissional()){
+		if(!(this instanceof clienteProfissional)){
 			throw new ClienteNaoProfissionalException();
 		}
 

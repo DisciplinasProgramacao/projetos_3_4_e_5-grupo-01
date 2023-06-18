@@ -315,12 +315,14 @@ public class PlataformaStreaming{
 	}
 	*/
 	/*Arrumar um jeito de saber quantas midias o cliente avaliou*/
-	public int clientesMaisDe15Avaliacoes () {
-		int numClientesMaisDe15Avaliacoes = clientes.keySet().stream()
-											.filter(c -> c.getAvaliacoes() > 15)
-											.mapToInt(Cliente::getAvaliacoes);
-
-		return numClientesMaisDe15Avaliacoes;
+	public double clientesMaisDe15Avaliacoes () {
+		int totalClientes = getClientes().size();
+		int numClientesMaisDe15Avaliacoes = (int) getClientes().values().stream()
+			.filter(c -> c.getNotas().size() >= 15)
+			.count();
+	
+		double porcentagem = (double) numClientesMaisDe15Avaliacoes / totalClientes * 100;
+		return porcentagem;
 	}
 
 }

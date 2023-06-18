@@ -1,4 +1,10 @@
+package test;
 import org.junit.Test;
+
+import Avaliacao;
+import Cliente;
+import Midia;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;

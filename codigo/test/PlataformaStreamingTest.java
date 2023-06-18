@@ -1,5 +1,13 @@
+package test;
 import org.junit.Before;
 import org.junit.Test;
+
+import Cliente;
+import Lista;
+import Midia;
+import PlataformaStreaming;
+import Serie;
+
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

@@ -10,6 +10,12 @@ public class Avaliacao {
 		this.comentario = comentario;
 		this.data = data;
 	}
+	
+	public Avaliacao(float nota, String data) {
+		this.nota = nota;
+		this.comentario = null;
+		this.data = data;
+	}
 
 	public float getNota() {
 		return nota;
