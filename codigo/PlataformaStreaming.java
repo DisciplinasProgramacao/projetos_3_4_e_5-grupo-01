@@ -2,13 +2,11 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.*;
 
-
-public class PlataformaStreaming{
+public class PlataformaStreaming {
 	private String nome;
 	private HashMap<String, Midia> midia;
 	private HashMap<String, Cliente> clientes;
 	private Cliente clienteAtual;
-
 
 	public PlataformaStreaming(String nome, Cliente clienteAtual) {
 		this.nome = nome;
@@ -16,6 +14,7 @@ public class PlataformaStreaming{
 		this.clientes = new HashMap<String, Cliente>();
 		this.clienteAtual = clienteAtual;
 	}
+
 	public PlataformaStreaming() {
 		this.midia = new HashMap<String, Midia>();
 		this.clientes = new HashMap<String, Cliente>();
@@ -24,14 +23,16 @@ public class PlataformaStreaming{
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public HashMap<String, Midia> getMidia() {
 		return midia;
 	}
 
-	public Boolean existeMidia(String key){
+	public Boolean existeMidia(String key) {
 		return midia.containsKey(key);
 	}
 
@@ -43,62 +44,68 @@ public class PlataformaStreaming{
 		return clientes;
 	}
 
-
 	public void setClientes(HashMap<String, Cliente> clientes) {
 		this.clientes = clientes;
 	}
+
 	public Cliente getClienteAtual() {
 		return clienteAtual;
 	}
+
 	public void setClienteAtual(Cliente clienteAtual) {
 		this.clienteAtual = clienteAtual;
 	}
-	
-	
-	 /**
-     * Verifica com base na hash de clientes os usuários presentes e aquele que possui nome de usuario e senha iguais aos passados como parâmetro é setado como cliente atual 
-     * @param nomeUsuario indica o nome do usuario
-     * @param senha indica a senha do usuario
-     */
+
+	/**
+	 * Verifica com base na hash de clientes os usuários presentes e aquele que
+	 * possui nome de usuario e senha iguais aos passados como parâmetro é setado
+	 * como cliente atual
+	 * 
+	 * @param nomeUsuario indica o nome do usuario
+	 * @param senha       indica a senha do usuario
+	 */
 	public boolean login(String login, String senha) {
 		for (Cliente c : clientes.values()) {
 			if (c.getLogin().equals(login) && c.getSenha().equals(senha)) {
-				
+
 				setClienteAtual(c);
 				return true;
 			}
 		}
-		
+
 		return false;
-		
+
 	}
-	
+
 	/**
-     * Adiciona uma serie na lista de series  
-     * @param serie
-     */
+	 * Adiciona uma serie na lista de series
+	 * 
+	 * @param serie
+	 */
 	public void adicionarMidia(Midia midia) {
 		this.midia.put(Integer.toString(midia.getId()), midia);
 	}
 
-	public Midia getMidiaEspecifica(String id){
+	public Midia getMidiaEspecifica(String id) {
 		Midia m = this.midia.get(id);
 		return m;
 	}
-	
+
 	/**
-     * Adiciona o cliente na lista de clientes   
-     * @param cliente
-     */
+	 * Adiciona o cliente na lista de clientes
+	 * 
+	 * @param cliente
+	 */
 	public void adicionarCliente(Cliente cliente) {
 		clientes.put(cliente.getNomeDeUsuario(), cliente);
 	}
-	
+
 	/**
-     * Filtra a lista de series por genero  
-     * @param genero indica o genero a ser filtrado 
-     * @return listaFiltrada retorna uma nova lista com as series do genero indicado
-     */
+	 * Filtra a lista de series por genero
+	 * 
+	 * @param genero indica o genero a ser filtrado
+	 * @return listaFiltrada retorna uma nova lista com as series do genero indicado
+	 */
 	public Lista<Midia> filtrarPorGenero(String genero) {
 		Lista<Midia> listaFiltrada = new Lista<Midia>();
 		for (Midia m : midia.values()) {
@@ -109,75 +116,77 @@ public class PlataformaStreaming{
 
 		return listaFiltrada;
 	}
-	 
-		
+
 	/**
-     * Filtra a lista de series por idioma  
-     * @param idioma indica o idioma a ser filtrado 
-     * @return listaFiltrada retorna uma nova lista com as series do idioma indicado
-     */
-	 public Lista<Midia> filtrarPorIdioma(String idioma) {
-		 Lista<Midia> lista = new Lista<Midia>();
-		 for (Midia m : midia.values()) {
-			 if (m.getIdioma().equals(idioma)) {
-				 lista.add(m);
-			 }
-		 }
-		 
-		 return lista;
-		 
-	 }
-	 
-		/**
-     * Filtra a lista de series por quantidade de episodios   
-     * @param quantEpisodios indica a quantidade a ser filtrada 
-     * @return listaFiltrada retorna uma nova lista com as series da quantidade indicada
-     */
-		public Lista<Midia> filtrarPorQtdEpisodios(int quantEpisodios) {
-			Lista<Midia> listaFiltrada = new Lista<Midia>();
-			for (Midia m : midia.values()) {
-				if(m instanceof Serie){
-					if(((Serie) m).getQuantidadeEpisodios() == quantEpisodios){
-						listaFiltrada.add(m);
-					}
+	 * Filtra a lista de series por idioma
+	 * 
+	 * @param idioma indica o idioma a ser filtrado
+	 * @return listaFiltrada retorna uma nova lista com as series do idioma indicado
+	 */
+	public Lista<Midia> filtrarPorIdioma(String idioma) {
+		Lista<Midia> lista = new Lista<Midia>();
+		for (Midia m : midia.values()) {
+			if (m.getIdioma().equals(idioma)) {
+				lista.add(m);
+			}
+		}
+
+		return lista;
+
+	}
+
+	/**
+	 * Filtra a lista de series por quantidade de episodios
+	 * 
+	 * @param quantEpisodios indica a quantidade a ser filtrada
+	 * @return listaFiltrada retorna uma nova lista com as series da quantidade
+	 *         indicada
+	 */
+	public Lista<Midia> filtrarPorQtdEpisodios(int quantEpisodios) {
+		Lista<Midia> listaFiltrada = new Lista<Midia>();
+		for (Midia m : midia.values()) {
+			if (m instanceof Serie) {
+				if (((Serie) m).getQuantidadeEpisodios() == quantEpisodios) {
+					listaFiltrada.add(m);
 				}
 			}
-
-			if(listaFiltrada.size() == 0){
-				return null;
-			}
-
-			return listaFiltrada;
-			
 		}
 
-		//incrementa a audiencia da serie toda vez que ela for assistida por algum Cliente.
-		public void registrarAudiencia(Serie serie) {
-			serie.setAudiencia(serie.getAudiencia() + 1);
+		if (listaFiltrada.size() == 0) {
+			return null;
 		}
-		
+
+		return listaFiltrada;
+
+	}
+
+	// incrementa a audiencia da serie toda vez que ela for assistida por algum
+	// Cliente.
+	public void registrarAudiencia(Serie serie) {
+		serie.setAudiencia(serie.getAudiencia() + 1);
+	}
+
 	// /**
-	//  * 
-	//  * @throws IOException
-	//  */
+	// *
+	// * @throws IOException
+	// */
 	// public String[] carregaArquivo(String caminhoArquivo) throws IOException {
-	//     String csvFilePath = caminhoArquivo;
-	//     String linha = "";
-	//     String regex = ",";
-	//     String[] campos = null;
+	// String csvFilePath = caminhoArquivo;
+	// String linha = "";
+	// String regex = ",";
+	// String[] campos = null;
 
-	//     try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
-	//         linha = br.readLine();
-	//         if (linha != null) {
-	//             campos = linha.split(regex);
-	//         }
-	//     } catch (IOException e) {
-	//         System.out.println("Ocorreu um erro no arquivo");
-	//     }
-
-	//     return campos;
+	// try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+	// linha = br.readLine();
+	// if (linha != null) {
+	// campos = linha.split(regex);
+	// }
+	// } catch (IOException e) {
+	// System.out.println("Ocorreu um erro no arquivo");
 	// }
 
+	// return campos;
+	// }
 
 	public void carregaEspectador(String linha) {
 		String regex = ";";
@@ -185,7 +194,7 @@ public class PlataformaStreaming{
 
 		if (linha != null) {
 			campos = linha.split(regex);
-		    String nome = campos[0];
+			String nome = campos[0];
 			String login = campos[1];
 			String senha = campos[2];
 
@@ -193,11 +202,11 @@ public class PlataformaStreaming{
 			Random random = new Random();
 			int profissional = random.nextInt(100);
 
-			if(profissional < 20){
+			if (profissional < 20) {
 				c.tornarProfissional();
 			}
 
-			this.midia.forEach((key, value) ->{
+			this.midia.forEach((key, value) -> {
 				c.adicionaNaListaParaVer(value);
 			});
 
@@ -215,60 +224,56 @@ public class PlataformaStreaming{
 			// System.out.println(login);
 			String jaVisto = campos[1];
 			String idMidia = campos[2];
-			
 
-			try{
+			try {
 				Midia m = midia.get(idMidia);
 				// System.out.println(m.toString());
 
-				if(m != null){
+				if (m != null) {
 					Cliente c = clientes.get(login);
-					if (jaVisto.equals("A")) { //ja assistido
+					if (jaVisto.equals("A")) { // ja assistido
 						// c.adicionaNaListaVistas(m);
 						// m.registrarAudiencia();
 						c.getListaParaVer().removeS(m.getNome());
 						c.getListaJaVista().put(m, LocalDate.now());
 						m.registrarAudiencia();
 						// c.registrarAudiencia(m);
-					}	
+					}
 				}
 
 				return;
-			} catch (Exception e){
+			} catch (Exception e) {
 				System.out.println(e);
 				return;
 			}
-			
+
 		}
 
-			
 	}
-	
-		
+
 	public List<Midia> top10MidiasMelhorAvaliacao() {
-		List <Midia> midiasMaior100 = new ArrayList<Midia>();
+		List<Midia> midiasMaior100 = new ArrayList<Midia>();
 		midiasMaior100 = midia.values().stream()
 				.filter(m -> m.getNotas().size() >= 1)
 				.collect(Collectors.toList());
 
-// colocar em ordem decrescente
-		List <Midia> midiasOrdenadas = midiasMaior100.stream()
+		// colocar em ordem decrescente
+		List<Midia> midiasOrdenadas = midiasMaior100.stream()
 				.sorted(Comparator.comparing(Midia::mediaAvaliacao))
 				.collect(Collectors.toList());
-				
+
 		List<Midia> top10 = midiasOrdenadas.stream()
 				.limit(10)
 				.collect(Collectors.toList());
-		
+
 		return top10;
 	}
-	
+
 	public List<Midia> maisVisualizacao() {
-		List <Midia> midiasMaior100 = new ArrayList<Midia>();
+		List<Midia> midiasMaior100 = new ArrayList<Midia>();
 		midiasMaior100 = midia.values().stream()
 				.filter(m -> m.getAudiencia() >= 100)
 				.collect(Collectors.toList());
-
 
 		List<Midia> top10 = midiasMaior100.stream()
 				.limit(10)
@@ -276,51 +281,47 @@ public class PlataformaStreaming{
 
 		return top10;
 	}
-	
+
 	/**
 	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
 	 * 
-	 * @return mapaClientes Filtra e retorna uma Hashmap com o cliente que mais assistiu mídias e o número de mídias que ele assistiu
+	 * @return mapaClientes Filtra e retorna uma Hashmap com o cliente que mais
+	 *         assistiu mídias e o número de mídias que ele assistiu
 	 */
-	public HashMap<Integer, Cliente> clienteMaisAssistiuMidiasNumMidias() {
-		int nMidias = 0, auxNumMidias;
-		Cliente auxCliente = null;
-		HashMap<Integer, Cliente> mapaClientes = new HashMap();
-		for (Cliente c : getClientes().values()) {
-			auxNumMidias = c.getListaJaVista().size();
+	public Map<Integer, Cliente> clienteMaisAssistiuMidiasNumMidias() {
+		Map<Integer, Cliente> mapaClientes = new HashMap<>();
 
-			if (auxNumMidias > nMidias) {
-				nMidias = auxNumMidias;
-				auxCliente = c;
-			}
-		}
-		mapaClientes.put(nMidias, auxCliente);
+		getClientes().values().stream()
+				.max(Comparator.comparingInt(c -> c.getListaJaVista().size()))
+				.ifPresent(cliente -> mapaClientes.put(cliente.getListaJaVista().size(), cliente));
+
 		return mapaClientes;
 	}
-	
-	//finalizar em casa, tem que fazer um forEach midia, encontrar o cliente na midia pra saber quantas vezes ele fez avaliacoes
-	/* 
-	public HashMap<Integer, Cliente> clienteMaisAvaliouNumAvaliacoes(){
-		int nAvaliacoes = 0, auxNumAvaliacoes;
-		Cliente auxCliente = null;
-		HashMap<Integer, Cliente> mapaClientes = new HashMap();
-		for (Midia m : getMidia().values()) {
-			auxNumAvaliacoes = m.get;
 
-			if (auxNumAvaliacoes > nAvaliacoes) {
-				nAvaliacoes = auxNumAvaliacoes;
-				auxCliente = c;
-			}
-		}
-	}
-	*/
-	/*Arrumar um jeito de saber quantas midias o cliente avaliou*/
-	public double clientesMaisDe15Avaliacoes () {
+	// finalizar em casa, tem que fazer um forEach midia, encontrar o cliente na
+	// midia pra saber quantas vezes ele fez avaliacoes
+	/*
+	 * public HashMap<Integer, Cliente> clienteMaisAvaliouNumAvaliacoes(){
+	 * int nAvaliacoes = 0, auxNumAvaliacoes;
+	 * Cliente auxCliente = null;
+	 * HashMap<Integer, Cliente> mapaClientes = new HashMap();
+	 * for (Midia m : getMidia().values()) {
+	 * auxNumAvaliacoes = m.get;
+	 * 
+	 * if (auxNumAvaliacoes > nAvaliacoes) {
+	 * nAvaliacoes = auxNumAvaliacoes;
+	 * auxCliente = c;
+	 * }
+	 * }
+	 * }
+	 */
+	/* Arrumar um jeito de saber quantas midias o cliente avaliou */
+	public double clientesMaisDe15Avaliacoes() {
 		int totalClientes = getClientes().size();
 		int numClientesMaisDe15Avaliacoes = (int) getClientes().values().stream()
-			.filter(c -> c.getNotas().size() >= 15)
-			.count();
-	
+				.filter(c -> c.getNotas().size() >= 15)
+				.count();
+
 		double porcentagem = (double) numClientesMaisDe15Avaliacoes / totalClientes * 100;
 		return porcentagem;
 	}
