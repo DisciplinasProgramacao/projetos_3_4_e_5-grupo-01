@@ -9,6 +9,8 @@ public class Midia {
 	private int id;
 	private HashMap<Cliente, Avaliacao> notas;
 	private boolean lancamento;
+	private double mediaNotas;
+	
 	
 	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
@@ -19,6 +21,7 @@ public class Midia {
 		this.id = id;
 		this.notas = new HashMap<Cliente, Avaliacao>();
 		this.lancamento = false;
+		this.mediaNotas = calcMedia();
 	}
 	
 	public boolean getLancamento() {
@@ -152,6 +155,14 @@ public class Midia {
 			return 0;
 		}
 		
+	}
+
+	public double getMediaNotas() {
+		return calcMedia();
+	}
+
+	public void setMediaNotas(float mediaNotas) {
+		this.mediaNotas = mediaNotas;
 	}
 	
 
