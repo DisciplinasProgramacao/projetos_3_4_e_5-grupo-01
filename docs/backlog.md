@@ -15,7 +15,7 @@ Como um dev | Garantir a robustez do sistema principal | Para que o sistema poss
 Como um dev | Garantir que um cliente não pode avaliar a mesma mídia duas vezes | Para que o sistema possa ser completo e funcione corretamente | Concluído | Lucas Tabosa
 Como um dev | Garantir que clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação | Para que o sistema possa ser completo e funcione corretamente | Concluído | Lucas Tabosa e Diego Machado
 Como um dev | Implementar método para ver qual cliente assistiu mais mídias, e quantas mídias | Para que o sistema possa ser completo e funcione corretamente | Concluído | Lucas Tabosa
-Como um dev | Implementar método para ver qual cliente tem mais avaliações, e quantas avaliações | Para que o sistema possa ser completo e funcione corretamente | Concluído | Diogo Machado
+Como um dev | Implementar método para ver qual cliente tem mais avaliações, e quantas avaliações | Para que o sistema possa ser completo e funcione corretamente | Concluído | Diego Machado
 Como um dev | Implementar método para ver qual a porcentagem dos clientes com pelo menos 15 avaliações | Para que o sistema possa ser completo e funcione corretamente | Concluído | Vinícius Gonzaga
 Como um dev | Implementar método para ver quais são as 10 mídias de melhor avaliação, com pelo menos 100 avaliações, em ordem decrescente | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus 
 Como um dev | Implementar método para ver quais são as 10 mídias com mais visualizações, em ordem decrescente; | Para que o sistema possa ser completo e funcione corretamente | Concluído | Henrique Diniz
