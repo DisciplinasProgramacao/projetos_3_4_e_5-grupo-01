@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class PlataformaStreaming {
 	private String nome;
@@ -218,15 +219,20 @@ public class PlataformaStreaming {
 
 	}
 
+	/**
+	 * Busca as top10 mídias com melhores avaliações com pelo menos 100 avaliações.
+	 * As mídias devem estar em ordem decrescente
+	 * 
+	 * @return top10 List com as 10 mídias com melhor avaliação em ordem decrescente
+	 */
 	public List<Midia> top10MidiasMelhorAvaliacao() {
 		List<Midia> midiasMaior100 = new ArrayList<Midia>();
 		midiasMaior100 = midia.values().stream()
-				.filter(m -> m.getNotas().size() >= 1)
+				.filter(m -> m.getNotas().size() >= 100)
 				.collect(Collectors.toList());
 
-		// colocar em ordem decrescente
 		List<Midia> midiasOrdenadas = midiasMaior100.stream()
-				.sorted(Comparator.comparing(Midia::mediaAvaliacao))
+				.sorted(Comparator.comparing(Midia::calcMedia).reversed())
 				.collect(Collectors.toList());
 
 		List<Midia> top10 = midiasOrdenadas.stream()
@@ -236,18 +242,61 @@ public class PlataformaStreaming {
 		return top10;
 	}
 
-	public List<Midia> maisVisualizacao() {
-		List<Midia> midiasMaior100 = new ArrayList<Midia>();
-		midiasMaior100 = midia.values().stream()
-				.filter(m -> m.getAudiencia() >= 100)
-				.collect(Collectors.toList());
 
-		List<Midia> top10 = midiasMaior100.stream()
-				.limit(10)
-				.collect(Collectors.toList());
+	/**
+	 * Busca as top10 mídias com melhores avaliações com pelo menos 100 avaliações e as separa por gênero.
+	 * As mídias devem estar em ordem decrescente
+	 * 
+	 * @return top10PorGenero List com as 10 mídias com melhor avaliação em ordem decrescente
+	 */
+	public List<Midia> top10MidiasMelhorAvaliacaoSeparadaPorGenero() {
+    List<Midia> midiasMaior100 = midia.values().stream()
+            .filter(m -> m.getNotas().size() >= 100)
+            .collect(Collectors.toList());
 
-		return top10;
-	}
+    Map<Generos, List<Midia>> midiasPorGenero = midiasMaior100.stream()
+            .collect(Collectors.groupingBy(Midia::getGenero));
+
+    List<Midia> top10PorGenero = new ArrayList<>();
+    midiasPorGenero.forEach((genero, midias) -> {
+        List<Midia> midiasOrdenadas = midias.stream()
+                .sorted(Comparator.comparing(Midia::calcMedia).reversed())
+                .limit(10)
+                .collect(Collectors.toList());
+        top10PorGenero.addAll(midiasOrdenadas);
+    });
+
+    return top10PorGenero;
+}
+
+
+	/**
+	 * Busca as top10 mídias com mais vizualizaçõescom pelo menos 100 avaliações separadas por gênero. As
+	 * mídias devem estar em ordem decrescente
+	 * 
+	 * @return top10 List com as 10 mídias com mais vizualizações em ordem
+	 *         decrescente
+	 */
+	public List<Midia> top10MidiasMaisVisualizacaoSeparadaPorGenero() {
+    List<Midia> midiasMaior100 = midia.values().stream()
+            .filter(m -> m.getAudiencia() >= 100)
+            .collect(Collectors.toList());
+
+    Map<Generos, List<Midia>> midiasPorGenero = midiasMaior100.stream()
+            .collect(Collectors.groupingBy(Midia::getGenero));
+
+    List<Midia> top10PorGenero = new ArrayList<>();
+    midiasPorGenero.forEach((genero, midias) -> {
+        List<Midia> midiasOrdenadas = midias.stream()
+                .sorted(Comparator.comparing(Midia::getAudiencia).reversed())
+                .limit(10)
+                .collect(Collectors.toList());
+        top10PorGenero.addAll(midiasOrdenadas);
+    });
+
+    return top10PorGenero;
+}
+
 
 	/**
 	 * Busca o cliente que mais assistiu mídias e quantas mídias ele assistiu
@@ -265,24 +314,23 @@ public class PlataformaStreaming {
 		return mapaClientes;
 	}
 
-	// finalizar em casa, tem que fazer um forEach midia, encontrar o cliente na
-	// midia pra saber quantas vezes ele fez avaliacoes
-	/*
-	 * public HashMap<Integer, Cliente> clienteMaisAvaliouNumAvaliacoes(){
-	 * int nAvaliacoes = 0, auxNumAvaliacoes;
-	 * Cliente auxCliente = null;
-	 * HashMap<Integer, Cliente> mapaClientes = new HashMap();
-	 * for (Midia m : getMidia().values()) {
-	 * auxNumAvaliacoes = m.get;
+	/**
+	 * Busca o cliente que mais avaliou mídias e a quantidade de mídias que ele
+	 * avaliou
 	 * 
-	 * if (auxNumAvaliacoes > nAvaliacoes) {
-	 * nAvaliacoes = auxNumAvaliacoes;
-	 * auxCliente = c;
-	 * }
-	 * }
-	 * }
+	 * @return Filtra e retorna uma Entry com o cliente que mais
+	 *         avaliou mídias e o número de mídias que ele assistiu junto com o
+	 *         número de avaliações feitas
 	 */
-	/* Arrumar um jeito de saber quantas midias o cliente avaliou */
+	public Entry<String, Cliente> clienteMaisAvaliouNumAvaliacoes() {
+		return getClientes().entrySet().stream()
+				.max(Comparator.comparingLong(entry -> getMidia().values().stream()
+						.flatMap(m -> m.getNotas().entrySet().stream())
+						.filter(nota -> nota.getKey().equals(entry.getKey()))
+						.count()))
+				.orElse(null);
+	}
+
 	public double clientesMaisDe15Avaliacoes() {
 		int totalClientes = getClientes().size();
 		int numClientesMaisDe15Avaliacoes = (int) getClientes().values().stream()
