@@ -7,7 +7,7 @@ Como um dev | Implementar as classes Cliente, Serie e PlataformaStreaming como o
 Como um dev | Atualizar o diagrama original para contemplar o requisito de carga de dados | Para que o sistema possa ser completo e funcione corretamente | Concluído | Henrique Diniz
 Como um dev | Implementar os métodos para carga de dados de séries, clientes e audiência em funcionamento | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus
 Como um dev | Atualizar o diagrama para abrigar o novo tipo de mídia: Filme | Para que o sistema possa ser completo e funcione corretamente | Concluído | Henrique Diniz
-Como um dev | Implementar a lógica de carga de dados do catálogo de filmes | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus
+Como um dev | Implementar a lógica de carga de dados do catálogo de filmes | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus e Henrique Diniz
 Como um dev | Implementar o cadastro de clientes, filmes e séries | Para que o sistema possa ser completo e funcione corretamente | Concluído | Vinícius Gonzaga
 Como um dev | Salvar dados de clientes, filmes e séries | Para que o sistema possa ser completo e funcione corretamente | Concluído | Vinícius Gonzaga
 Como um dev | Implementar o protótipo de sistema cobrindo os requisitos atuais | Para que o sistema possa ser completo e funcione corretamente | Concluído | Vinícius Gonzaga
@@ -20,5 +20,6 @@ Como um dev | Implementar método para ver qual a porcentagem dos clientes com p
 Como um dev | Implementar método para ver quais são as 10 mídias de melhor avaliação, com pelo menos 100 avaliações, em ordem decrescente | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus 
 Como um dev | Implementar método para ver quais são as 10 mídias com mais visualizações, em ordem decrescente; | Para que o sistema possa ser completo e funcione corretamente | Concluído | Henrique Diniz
 Como um dev | Implementar método para ver estes mesmos dois últimos relatórios, porém com as mídias separadas por gênero | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus
+Como um dev | Quero manter o diagrama atualizado |  Para que eu possa localiza as funcoes que eu precisar   |   Concluído   |   Henrique Diniz   |
 
 > Written with [StackEdit](https://stackedit.io/).
