@@ -20,6 +20,7 @@ public abstract class Cliente {
 		private Lista<Midia> listaParaVer;
 		private HashMap<Midia,LocalDate> listaJaVista;
 		private HashMap<Midia, Float> notas;
+		private HashMap<Midia,Avaliacao> notasEspecialista;
 		
 		public Cliente(String nomeDeUsuario, String senha, String login) {
 			this.nomeDeUsuario = nomeDeUsuario;
@@ -98,11 +99,11 @@ public abstract class Cliente {
 			return listaJaVista.get(m);
 		}
 		
-	  public Lista<Midia> filtrarPorGenero(String genero) {
+	  public Lista<Midia> filtrarPorGenero(Generos genero) {
 	    Lista<Midia> listaFiltrada = new Lista<Midia>();
 	    
 	    for (Midia s : listaParaVer.allElements(new Midia[0])) {
-	        if (s.getGenero().equalsIgnoreCase(genero)) {
+	        if (s.getGenero()==genero) {
 	            listaFiltrada.add(s);
 	        }
 	    }
@@ -110,7 +111,7 @@ public abstract class Cliente {
 	    for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
 	        Midia midia = s.getKey();
 	        LocalDate data = s.getValue();
-	        if (midia.getGenero().equalsIgnoreCase(genero)) {
+	        if (midia.getGenero()==genero) {
 	            listaFiltrada.add(midia);
 	        }
 	    }
@@ -182,10 +183,10 @@ public abstract class Cliente {
 	     * @param serie indica a serie para ser registrada
 	 * @throws ClienteNaoProfissional
 	     */
-	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissionalException {
+	  public void registrarAudiencia(Midia m) throws ClienteNaoProfissional {
 
 		if(!(this instanceof clienteProfissional)){
-			throw new ClienteNaoProfissionalException();
+			throw new ClienteNaoProfissional();
 		}
 
 		LocalDate dataAtual = LocalDate.now();
@@ -211,21 +212,21 @@ public abstract class Cliente {
 	  }
 	  
 	
-	public Integer notaDaMidia(Midia m){
+	public Float notaDaMidia(Midia m){
 
 		if(notas.containsKey(m)){
 			return notas.get(m);
 		}
 
-		return -1;
+		return (float)-1.0;
 	}
 
 	public String toString(){
 		return "Nome: " + getNomeDeUsuario() + "\nLogin: " + getLogin();
 	}
 	  
-	public boolean isEspecialista() throws Exception {
-		try {
+	public boolean isEspecialista() throws usuarioNaoPodeComentarException{
+
 			int cont =0;
 			for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
 		        Midia midia = s.getKey();
@@ -240,8 +241,26 @@ public abstract class Cliente {
 			}else {
 				return false;
 			}
-		}catch (Exception e) {
-			throw new Exception("Unexpected error");
-		}
+	}
+
+	public boolean isComum() {
+
+			int cont =0;
+			for (HashMap.Entry<Midia, LocalDate> s : listaJaVista.entrySet()) {
+		        Midia midia = s.getKey();
+		        LocalDate data = s.getValue();
+		        LocalDate umMes = LocalDate.now().minusMonths(1);
+		        if(data.isAfter(umMes)) {
+		        	cont++;
+		        }
+		    }
+			if (cont < 0) {
+				throw new RuntimeException("Nao e possivel ter um numero negativo");
+			}
+			if(cont < 5) {
+				return true;
+			}else {
+				return false;
+			}
 	}
 }

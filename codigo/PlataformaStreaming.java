@@ -7,6 +7,7 @@ public class PlataformaStreaming {
 	private HashMap<String, Midia> midia;
 	private HashMap<String, Cliente> clientes;
 	private Cliente clienteAtual;
+	private Lista trailers = new Lista();
 
 	public PlataformaStreaming(String nome, Cliente clienteAtual) {
 		this.nome = nome;
@@ -160,34 +161,6 @@ public class PlataformaStreaming {
 
 	}
 
-	// incrementa a audiencia da serie toda vez que ela for assistida por algum
-	// Cliente.
-	public void registrarAudiencia(Serie serie) {
-		serie.setAudiencia(serie.getAudiencia() + 1);
-	}
-
-	// /**
-	// *
-	// * @throws IOException
-	// */
-	// public String[] carregaArquivo(String caminhoArquivo) throws IOException {
-	// String csvFilePath = caminhoArquivo;
-	// String linha = "";
-	// String regex = ",";
-	// String[] campos = null;
-
-	// try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
-	// linha = br.readLine();
-	// if (linha != null) {
-	// campos = linha.split(regex);
-	// }
-	// } catch (IOException e) {
-	// System.out.println("Ocorreu um erro no arquivo");
-	// }
-
-	// return campos;
-	// }
-
 	public void carregaEspectador(String linha) {
 		String regex = ";";
 		String[] campos = null;
@@ -198,13 +171,7 @@ public class PlataformaStreaming {
 			String login = campos[1];
 			String senha = campos[2];
 
-			Cliente c = new Cliente(nome, senha, login);
-			Random random = new Random();
-			int profissional = random.nextInt(100);
-
-			if (profissional < 20) {
-				c.tornarProfissional();
-			}
+			clienteComum c = new clienteComum(nome, senha, login);
 
 			this.midia.forEach((key, value) -> {
 				c.adicionaNaListaParaVer(value);

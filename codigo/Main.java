@@ -19,7 +19,7 @@ class Main {
 public static void main(String[] args) throws FileNotFoundException {
 
 
-    PlataformaStreaming app = new PlataformaStreaming("Netflix", new Cliente("admin", "123", "admin@admin"));    
+    PlataformaStreaming app = new PlataformaStreaming("Netflix", new clienteComum("admin", "123", "admin@admin"));    
 
     
     System.out.println("Aguarde o carregamente de Arquivos...");
@@ -235,19 +235,15 @@ public static void main(String[] args) throws FileNotFoundException {
                 
 
                 //add midias na lista para ver do cliente
-                Cliente cliente = new Cliente(nome, senha, login);
-
-                if(profissional.equals("1")){
-                    cliente.tornarProfissional();
-                }
+                clienteProfissional clienteProfissional = new clienteProfissional(nome, senha, login);
 
                 app.getMidia().forEach((key, value) -> {
-                    cliente.adicionaNaListaParaVer(value);
+                    clienteProfissional.adicionaNaListaParaVer(value);
                     // System.out.println(value.getNome());
                 });
 
 
-                app.adicionarCliente(cliente);
+                app.adicionarCliente(clienteProfissional);
 
                 try {
                     // Cria um FileWriter com o modo de append
@@ -496,7 +492,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
                         LocalDate diaAtual = LocalDate.now();
                         Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
                         
-                        m.avaliar(user, avaliacao);
+                        clienteProfissional.avaliar(user, avaliacao);
                         System.out.println("Avaliação feita com sucesso.");
 
                         try {

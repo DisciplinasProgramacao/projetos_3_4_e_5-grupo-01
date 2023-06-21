@@ -1,12 +1,15 @@
 import excecoes.midiaJaAvaliadaException;
+import excecoes.usuarioNaoPodeComentarException;
 
 public class clienteEspecialista extends Cliente implements Avalia{
 
     public clienteEspecialista(String nomeDeUsuario, String senha, String login) {
         super(nomeDeUsuario, senha, login);
-        //TODO Auto-generated constructor stub
     }
 
+    public clienteEspecialista(clienteComum clienteComum) {
+        super(clienteComum.getNomeDeUsuario(), clienteComum.getSenha(), clienteComum.getLogin());
+    }
      /**
      * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
      * @param midia a midia avaliada
@@ -19,7 +22,11 @@ public class clienteEspecialista extends Cliente implements Avalia{
         }
 
 
-        midia.adicionarAvaliacao(this, avaliacao);
+        try {
+            midia.adicionarAvaliacao(this, avaliacao);
+        } catch (usuarioNaoPodeComentarException e) {
+            e.printStackTrace();
+        }
         adicionarAvaliacao(midia, avaliacao.getNota());
     }
 }

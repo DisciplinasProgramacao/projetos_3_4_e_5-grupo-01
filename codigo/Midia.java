@@ -1,9 +1,11 @@
 import java.util.HashMap;
+
+import excecoes.usuarioNaoPodeComentarException;
 public class Midia {
 
 	private String nome;
-	private String genero;
-	private String idioma;
+	private Generos genero;
+	private Idiomas idioma;
 	private int audiencia;
 	private String dataLancamento;
 	private int id;
@@ -11,11 +13,8 @@ public class Midia {
 	private boolean lancamento;
 	private double mediaNotas;
 	
-	
-	public Midia(String nome, String genero, String idioma, int audiencia,String dataLancamento, int id) {
+	public Midia(String nome, Generos acao, Idiomas PTBR, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
-		this.genero = genero;
-		this.idioma = idioma;
 		this.audiencia = audiencia;
 		this.dataLancamento = dataLancamento;
 		this.id = id;
@@ -24,7 +23,7 @@ public class Midia {
 		this.mediaNotas = calcMedia();
 	}
 	
-	public boolean getLancamento() {
+	public boolean isLancamento() {
 		return lancamento;
 	}
 	
@@ -44,8 +43,15 @@ public class Midia {
 		this.notas = notas;
 	}
 
-	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) {
-        notas.put(cliente, avaliacao);
+	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) throws usuarioNaoPodeComentarException{
+		if (cliente.isEspecialista() || cliente instanceof clienteProfissional) {
+			notas.put(cliente, avaliacao);
+		}
+		else if (avaliacao.getComentario().equals(null)) {
+			throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
+		} else {
+			notas.put(cliente, avaliacao);
+		}
     }
 
 	public boolean possuiAvaliacao(Cliente cliente) {
@@ -60,19 +66,19 @@ public class Midia {
 		this.nome = nome;
 	}
 
-	public String getGenero() {
+	public Generos getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Generos genero) {
 		this.genero = genero;
 	}
 
-	public String getIdioma() {
+	public Idiomas getIdioma() {
 		return idioma;
 	}
 
-	public void setIdioma(String idioma) {
+	public void setIdioma(Idiomas idioma) {
 		this.idioma = idioma;
 	}
 

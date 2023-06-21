@@ -1,4 +1,5 @@
 import excecoes.midiaJaAvaliadaException;
+import excecoes.usuarioNaoPodeComentarException;
 
 public class clienteProfissional extends Cliente implements Avalia {
 
@@ -18,7 +19,11 @@ public class clienteProfissional extends Cliente implements Avalia {
         }
 
 
-        midia.adicionarAvaliacao(this, avaliacao);
+        try {
+            midia.adicionarAvaliacao(this, avaliacao);
+        } catch (usuarioNaoPodeComentarException e) {
+            e.printStackTrace();
+        }
         adicionarAvaliacao(midia, avaliacao.getNota());
     }
 

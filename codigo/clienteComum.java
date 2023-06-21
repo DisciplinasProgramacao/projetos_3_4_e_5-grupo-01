@@ -5,9 +5,11 @@ public class clienteComum extends Cliente implements Avalia {
 
     public clienteComum(String nomeDeUsuario, String senha, String login) {
         super(nomeDeUsuario, senha, login);
-        //TODO Auto-generated constructor stub
     }
 
+    public clienteComum(clienteEspecialista clienteEspecialista) {
+        super(clienteEspecialista.getNomeDeUsuario(), clienteEspecialista.getSenha(), clienteEspecialista.getLogin());
+    }
 
     /**
      * Avalia a mídias específica, retornando true caso tudo ocorra como o esperado  
@@ -20,11 +22,9 @@ public class clienteComum extends Cliente implements Avalia {
             throw new midiaJaAvaliadaException("Você já avaliou esta mídia anteriormente.");
         }
 
-        if(avaliacao.getComentario() == null){
+        if(avaliacao.getComentario() != null){
             throw new usuarioNaoPodeComentarException("Esse usuário não pode comentar na avaliação.");
         }
-
-        midia.adicionarAvaliacao(this, avaliacao);
         adicionarAvaliacao(midia, avaliacao.getNota());
     }
     
