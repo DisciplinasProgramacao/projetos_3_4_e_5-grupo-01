@@ -49,6 +49,10 @@ public class Lista<T> {
     public boolean add(T newElement) {
         return this.data.add(newElement);
     }
+    
+    public T get(int index) {
+        return this.data.get(index) ;
+    }
 
     /**
      * Retorna, em um vetor/array, todos os elementos da lista. O vetor passado
