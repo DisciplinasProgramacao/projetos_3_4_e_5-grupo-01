@@ -13,11 +13,13 @@ public class Midia {
 	private boolean lancamento;
 	private double mediaNotas;
 	
-	public Midia(String nome, Generos acao, Idiomas PTBR, int audiencia,String dataLancamento, int id) {
+	public Midia(String nome, Generos genero, Idiomas idioma, int audiencia,String dataLancamento, int id) {
 		this.nome = nome;
 		this.audiencia = audiencia;
 		this.dataLancamento = dataLancamento;
 		this.id = id;
+		this.idioma = idioma;
+		this.genero = genero;
 		this.notas = new HashMap<Cliente, Avaliacao>();
 		this.lancamento = false;
 		this.mediaNotas = calcMedia();
@@ -46,10 +48,12 @@ public class Midia {
 	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) throws usuarioNaoPodeComentarException{
 		if (cliente.isEspecialista() || cliente instanceof clienteProfissional) {
 			notas.put(cliente, avaliacao);
+			cliente.adicionarAvaliacao(this, avaliacao);
 		}
-		else if (avaliacao.getComentario().equals(null)) {
+		else if (avaliacao.getComentario().equals(null) == false) {
 			throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
 		} else {
+			cliente.adicionarAvaliacao(this, avaliacao);
 			notas.put(cliente, avaliacao);
 		}
     }
@@ -170,6 +174,5 @@ public class Midia {
 	public void setMediaNotas(float mediaNotas) {
 		this.mediaNotas = mediaNotas;
 	}
-	
 
 }
