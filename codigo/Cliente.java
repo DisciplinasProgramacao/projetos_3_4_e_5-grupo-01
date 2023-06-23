@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import excecoes.ClienteNaoProfissional;
@@ -25,7 +26,6 @@ public abstract class Cliente {
 		this.notas = new HashMap<Midia, Avaliacao>();
 		this.listaJaVista = new HashMap<Midia, LocalDate>();
 	}
-
 	public String getLogin() {
 		return login;
 	}
@@ -83,7 +83,7 @@ public abstract class Cliente {
 	}
 
 	public void adicionaNaListaVistas(Midia m) {
-		listaParaVer.add(m);
+		listaJaVista.put(m,LocalDate.now());
 	}
 
 	public void retirarDaLista(String nomeDaMidia) {
