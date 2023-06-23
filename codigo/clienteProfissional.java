@@ -24,7 +24,7 @@ public class clienteProfissional extends Cliente implements Avalia {
         } catch (usuarioNaoPodeComentarException e) {
             e.printStackTrace();
         }
-        adicionarAvaliacao(midia, avaliacao.getNota());
+        adicionarAvaliacao(midia, avaliacao);
     }
 
 

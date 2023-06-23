@@ -25,7 +25,7 @@ public class clienteComum extends Cliente implements Avalia {
         if(avaliacao.getComentario() != null){
             throw new usuarioNaoPodeComentarException("Esse usuário não pode comentar na avaliação.");
         }
-        adicionarAvaliacao(midia, avaliacao.getNota());
+        adicionarAvaliacao(midia, avaliacao);
     }
     
 }
