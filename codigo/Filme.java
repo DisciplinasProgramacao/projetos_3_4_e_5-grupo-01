@@ -29,7 +29,7 @@ public class Filme extends Midia {
 
 	public Filme(String nome, Generos acao, Idiomas PTBR, int duracao, int audiencia, int id, String dataLancamento) {
 		super(nome, acao, PTBR, audiencia, dataLancamento, id);
-		this.duracaoSeg = duracaoSeg;
+		this.duracaoSeg = duracao;
 	}
 
 	public int getDuracaoSeg() {
