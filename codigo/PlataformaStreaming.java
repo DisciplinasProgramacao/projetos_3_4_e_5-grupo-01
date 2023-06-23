@@ -41,9 +41,8 @@ public class PlataformaStreaming {
 	public void setSeries(HashMap<String, Midia> midia) {
 		this.midia = midia;
 	}
-
 	public HashMap<String, Cliente> getClientes() {
-		return clientes;
+		return this.clientes;
 	}
 
 	public void setClientes(HashMap<String, Cliente> clientes) {
@@ -108,7 +107,7 @@ public class PlataformaStreaming {
 	 * @param genero indica o genero a ser filtrado
 	 * @return listaFiltrada retorna uma nova lista com as series do genero indicado
 	 */
-	public Lista<Midia> filtrarPorGenero(String genero) {
+	public Lista<Midia> filtrarPorGenero(Generos genero) {
 		Lista<Midia> listaFiltrada = new Lista<Midia>();
 		for (Midia m : midia.values()) {
 			if (m.getGenero().equals(genero)) {
@@ -125,7 +124,7 @@ public class PlataformaStreaming {
 	 * @param idioma indica o idioma a ser filtrado
 	 * @return listaFiltrada retorna uma nova lista com as series do idioma indicado
 	 */
-	public Lista<Midia> filtrarPorIdioma(String idioma) {
+	public Lista<Midia> filtrarPorIdioma(Idiomas idioma) {
 		Lista<Midia> lista = new Lista<Midia>();
 		for (Midia m : midia.values()) {
 			if (m.getIdioma().equals(idioma)) {
@@ -231,7 +230,7 @@ public class PlataformaStreaming {
 				.filter(m -> m.getNotas().size() >= 100)
 				.collect(Collectors.toList());
 
-		List<Midia> midiasOrdenadas = midiasMaior100.stream()
+		List<Midia> midiasOrdenadas = midia.values().stream()
 				.sorted(Comparator.comparing(Midia::calcMedia).reversed())
 				.collect(Collectors.toList());
 
@@ -253,7 +252,6 @@ public class PlataformaStreaming {
     List<Midia> midiasMaior100 = midia.values().stream()
             .filter(m -> m.getNotas().size() >= 100)
             .collect(Collectors.toList());
-
     Map<Generos, List<Midia>> midiasPorGenero = midiasMaior100.stream()
             .collect(Collectors.groupingBy(Midia::getGenero));
 
@@ -265,7 +263,7 @@ public class PlataformaStreaming {
                 .collect(Collectors.toList());
         top10PorGenero.addAll(midiasOrdenadas);
     });
-
+    
     return top10PorGenero;
 }
 
@@ -281,7 +279,6 @@ public class PlataformaStreaming {
     List<Midia> midiasMaior100 = midia.values().stream()
             .filter(m -> m.getAudiencia() >= 100)
             .collect(Collectors.toList());
-
     Map<Generos, List<Midia>> midiasPorGenero = midiasMaior100.stream()
             .collect(Collectors.groupingBy(Midia::getGenero));
 
@@ -306,11 +303,10 @@ public class PlataformaStreaming {
 	 */
 	public Map<Integer, Cliente> clienteMaisAssistiuMidiasNumMidias() {
 		Map<Integer, Cliente> mapaClientes = new HashMap<>();
-
 		getClientes().values().stream()
 				.max(Comparator.comparingInt(c -> c.getListaJaVista().size()))
 				.ifPresent(cliente -> mapaClientes.put(cliente.getListaJaVista().size(), cliente));
-
+		
 		return mapaClientes;
 	}
 
@@ -340,5 +336,7 @@ public class PlataformaStreaming {
 		double porcentagem = (double) numClientesMaisDe15Avaliacoes / totalClientes * 100;
 		return porcentagem;
 	}
+	
+
 
 }
