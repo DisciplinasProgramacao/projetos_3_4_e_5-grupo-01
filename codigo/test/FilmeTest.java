@@ -1,10 +1,16 @@
-
+package test;
+import Avaliacao;
+import Cliente;
+import Filme;
+import Midia;
+import Serie;
 import org.junit.Test;
 
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+
 
 public class FilmeTest {
     Filme f;

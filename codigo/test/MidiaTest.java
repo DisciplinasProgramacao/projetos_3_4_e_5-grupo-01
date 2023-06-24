@@ -1,9 +1,6 @@
-package test;
+
 import org.junit.Test;
 
-import Avaliacao;
-import Cliente;
-import Midia;
 import excecoes.usuarioNaoPodeComentarException;
 
 import static org.junit.Assert.*;
@@ -34,6 +31,12 @@ public class MidiaTest {
         c1 = new clienteComum("Cliente teste1", "1234", "login");
         c2 = new clienteEspecialista("Cliente teste2", "4321", "login2");
         c3 = new clienteProfissional("Cliente teste3", "4321", "login3");
+    }
+    @Test
+    public void testLancamento() {
+    	assertFalse(midia1.isLancamento());
+    	midia1.tornarLancamento();
+    	assertTrue(midia1.isLancamento());
     }
     @Test
     public void testRegistrarAudiencia() {
@@ -92,6 +95,20 @@ public class MidiaTest {
     }
     
     @Test
+    public void testPossuiAvaliacao() {
+    	Avaliacao avaliacao1 = new Avaliacao(5, "12/02/2006");
+    	assertFalse(midia1.possuiAvaliacao(c1));
+    	try {
+			midia1.adicionarAvaliacao(c1, avaliacao1);
+		} catch (usuarioNaoPodeComentarException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	System.out.println(midia1.possuiAvaliacao(c1)); 
+    	assertTrue(midia1.possuiAvaliacao(c1));
+    }
+    
+    @Test
     public void testTipoCliente(){
     	Avaliacao avaliacao1 = new Avaliacao(5, "12/02/2006");
         Avaliacao avaliacao2 = new Avaliacao(3, "dsadsada","12/02/2006");
@@ -115,5 +132,23 @@ public class MidiaTest {
 		}
         assertFalse(c2.isComum());
         assertTrue(c1.isComum());
+    }
+    @Test
+    public void testGetAndSetGenero() {
+    	assertEquals(midia1.getGenero(), Generos.ACAO);
+    	midia1.setGenero(Generos.DOCUMENTARIO);
+    	assertEquals(midia1.getGenero(), Generos.DOCUMENTARIO);
+    }
+    @Test
+    public void testGetAndSetIdiomas() {
+    	assertEquals(midia1.getIdioma(), Idiomas.ENG);
+    	midia1.setIdioma(Idiomas.PTBR);
+    	assertEquals(midia1.getIdioma(), Idiomas.PTBR);
+    }
+    @Test
+    public void testGetAndSetId() {
+    	assertEquals(midia1.getId(), 4);
+    	midia1.setId(9);
+    	assertEquals(midia1.getId(), 9);
     }
 }
