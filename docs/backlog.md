@@ -21,5 +21,6 @@ Como um dev | Implementar método para ver quais são as 10 mídias de melhor av
 Como um dev | Implementar método para ver quais são as 10 mídias com mais visualizações, em ordem decrescente; | Para que o sistema possa ser completo e funcione corretamente | Concluído | Henrique Diniz
 Como um dev | Implementar método para ver estes mesmos dois últimos relatórios, porém com as mídias separadas por gênero | Para que o sistema possa ser completo e funcione corretamente | Concluído | Klaus
 Como um dev | Quero manter o diagrama atualizado |  Para que eu possa localiza as funcoes que eu precisar   |   Concluído   |   Henrique Diniz   |
+Como um dev | Quero criar testes |  Para que o sistema possa ser completo e funcione corretamente   |   Concluído   |   Diego Machado   |
 
 > Written with [StackEdit](https://stackedit.io/).
