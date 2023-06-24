@@ -103,6 +103,7 @@ public class Midia {
 			cliente.adicionarAvaliacao(this, avaliacao);
 			notas.put(cliente, avaliacao);
 		}
+		
 	}
 
 	/**

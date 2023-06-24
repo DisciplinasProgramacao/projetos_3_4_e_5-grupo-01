@@ -345,7 +345,7 @@ public class PlataformaStreaming {
             .collect(Collectors.toList());
     Map<Generos, List<Midia>> midiasPorGenero = midiasMaior100.stream()
             .collect(Collectors.groupingBy(Midia::getGenero));
-
+		
     List<Midia> top10PorGenero = new ArrayList<>();
     midiasPorGenero.forEach((genero, midias) -> {
         List<Midia> midiasOrdenadas = midias.stream()
