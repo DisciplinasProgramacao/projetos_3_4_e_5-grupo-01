@@ -296,12 +296,29 @@ public class ClienteUtil {
                          System.out.println("Cliente: " + cliente);
                          System.out.println("Quantidade de mídias assistidas: " + quantidadeMidias);
                    }
+<<<<<<< HEAD
+=======
+                }catch(Exception e) {
+                    System.out.println("Não foi possível buscar suas avaliações");
+                    System.out.println(e);
+                }
+            }else if (opt == 13){
+                try{
+                   System.out.println(app.clienteMaisAvaliouNumAvaliacoes());
                 }catch(Exception e) {
                     System.out.println("Não foi possível buscar suas avaliações");
                     System.out.println(e);
                 }
             }
-            
+            else if (opt == 14){
+                try{
+                   System.out.println(app.clientesMaisDe15Avaliacoes() + "%");
+>>>>>>> 36e1d3e5bb9390a54d79e05c701b20b47e2929bc
+                }catch(Exception e) {
+                    System.out.println("Não foi possível buscar suas avaliações");
+                    System.out.println(e);
+                }
+            }
             else if (opt == 0) {
                 break;
             } else {
