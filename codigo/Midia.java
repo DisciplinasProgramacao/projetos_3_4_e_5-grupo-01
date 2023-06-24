@@ -107,18 +107,6 @@ public class Midia {
 			notas.put(cliente, avaliacao);
 		}
 		
-		
-		
-		
-//		if (cliente.isEspecialista() || cliente instanceof clienteProfissional) {
-//			notas.put(cliente, avaliacao);
-//			cliente.adicionarAvaliacao(this, avaliacao);
-//		} else if (avaliacao.getComentario()== null) {
-//			throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
-//		} else {
-//			cliente.adicionarAvaliacao(this, avaliacao);
-//			notas.put(cliente, avaliacao);
-//		}
 	}
 
 	/**

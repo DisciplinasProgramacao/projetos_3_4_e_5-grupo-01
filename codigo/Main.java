@@ -134,7 +134,7 @@ public static void main(String[] args) throws FileNotFoundException {
                 if(opcao == 1){
                     System.out.println("Qual é o nome do filme?");
                     String nome = scanner.nextLine();
-                    System.out.println("Genero: 0 - romance | 1 - acao | 2 - comedia");
+                    System.out.println("Genero: 0 - acao | 1 - anime | 2 - aventura | 3 - comédia | 4 - documentario | 5 - drama | 6 - policial | 7 - romance | 8 - romance | 9 - suspense");
                     String genero = scanner.nextLine();
                     System.out.println("Idiomas: 0 - PT-BR | 1 - PT-PG | 2 - ENG");
                     String idioma = scanner.nextLine();
@@ -148,7 +148,7 @@ public static void main(String[] args) throws FileNotFoundException {
                         id = random.nextInt(10);
                     }
 
-                    Filme filme = new Filme(nome, Filme.GENEROS[Integer.parseInt(genero)], Filme.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(duracao), 0, id, data);
+                    Filme filme = new Filme(nome, Generos.getByIndex(Integer.parseInt(genero)), Idiomas.getByIndex(Integer.parseInt(idioma)), Integer.parseInt(duracao), 0, id, data);
 
                     if(lancamento.equals("1")){
                         filme.tornarLancamento();
@@ -177,7 +177,7 @@ public static void main(String[] args) throws FileNotFoundException {
                 else if(opcao ==2){
                     System.out.println("Qual é o nome do série?");
                     String nome = scanner.nextLine();
-                    System.out.println("Genero: 0 - romance | 1 - acao | 2 - comedia");
+                    System.out.println("Genero: 0 - acao | 1 - anime | 2 - aventura | 3 - comedia | 4 - documentario | 5 - drama | 6 - policial | 7 - romance | 8 - romance | 9 - suspense");
                     String genero = scanner.nextLine();
                     System.out.println("Idiomas: 0 - PT-BR | 1 - PT-PG | 2 - ENG");
                     String idioma = scanner.nextLine();
@@ -190,7 +190,7 @@ public static void main(String[] args) throws FileNotFoundException {
                         id = random.nextInt(10);
                     }
 
-                    Serie serie = new Serie(nome, Serie.GENEROS[Integer.parseInt(genero)], Serie.IDIOMAS[Integer.parseInt(idioma)], Integer.parseInt(eps), 0, id, data);
+                    Serie serie = new Serie(nome, Generos.getByIndex(Integer.parseInt(genero)), Idiomas.getByIndex(Integer.parseInt(idioma)), Integer.parseInt(eps), 0, id, data);
 
                     if(lancamento.equals("1")){
                         serie.tornarLancamento();
@@ -373,7 +373,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
             try {
                 int genero = scanner.nextInt();
                 if(genero == 1 || genero == 2 || genero == 3){
-                    String gen = Filme.GENEROS[genero];
+                    Generos gen = Generos.getByIndex(genero);
                     Lista<Midia> resultado = user.filtrarPorGenero(gen);
 
                     Midia[] arr = new Midia[user.getListaParaVer().size()];
@@ -405,7 +405,7 @@ public static void perfil(PlataformaStreaming app) throws Exception{
             try {
                 int idioma = scanner.nextInt();
                 if(idioma == 1 || idioma == 2 || idioma == 3){
-                    Lista<Midia> resultado = user.filtrarPorGenero(Filme.GENEROS[idioma]);
+                    Lista<Midia> resultado = user.filtrarPorIdioma(Idiomas.getByIndex(idioma));
 
                     Midia[] arr = new Midia[user.getListaParaVer().size()];
                     arr = resultado.allElements(arr);
