@@ -3,59 +3,123 @@ import java.util.stream.Collectors;
 import java.util.*;
 import java.util.Map.Entry;
 
+/**
+ * A classe PlataformaStreaming representa uma plataforma de streaming que oferece um catálogo de mídias para os clientes.
+ * Cada plataforma possui um nome, um conjunto de mídias disponíveis, um conjunto de clientes registrados e o cliente atualmente logado.
+ * A plataforma também pode armazenar uma lista de trailers.
+ */
 public class PlataformaStreaming {
-	private String nome;
-	private HashMap<String, Midia> midia;
-	private HashMap<String, Cliente> clientes;
-	private Cliente clienteAtual;
-	private Lista trailers = new Lista();
+    private String nome;
+    private HashMap<String, Midia> midia;
+    private HashMap<String, Cliente> clientes;
+    private Cliente clienteAtual;
+    private Lista trailers = new Lista();
 
-	public PlataformaStreaming(String nome, Cliente clienteAtual) {
-		this.nome = nome;
-		this.midia = new HashMap<String, Midia>();
-		this.clientes = new HashMap<String, Cliente>();
-		this.clienteAtual = clienteAtual;
-	}
+    /**
+     * Construtor da classe PlataformaStreaming que recebe o nome da plataforma e o cliente atualmente logado.
+     * Inicializa os atributos nome, midia, clientes e clienteAtual.
+     *
+     * @param nome          O nome da plataforma de streaming.
+     * @param clienteAtual  O cliente atualmente logado na plataforma.
+     */
+    public PlataformaStreaming(String nome, Cliente clienteAtual) {
+        this.nome = nome;
+        this.midia = new HashMap<String, Midia>();
+        this.clientes = new HashMap<String, Cliente>();
+        this.clienteAtual = clienteAtual;
+    }
 
-	public PlataformaStreaming() {
-		this.midia = new HashMap<String, Midia>();
-		this.clientes = new HashMap<String, Cliente>();
-	}
+    /**
+     * Construtor vazio da classe PlataformaStreaming.
+     * Inicializa os atributos midia e clientes como HashMap vazios.
+     */
+    public PlataformaStreaming() {
+        this.midia = new HashMap<String, Midia>();
+        this.clientes = new HashMap<String, Cliente>();
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    /**
+     * Obtém o nome da plataforma de streaming.
+     *
+     * @return O nome da plataforma.
+     */
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    /**
+     * Define o nome da plataforma de streaming.
+     *
+     * @param nome O nome da plataforma.
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public HashMap<String, Midia> getMidia() {
-		return midia;
-	}
+    /**
+     * Obtém o conjunto de mídias disponíveis na plataforma.
+     *
+     * @return O mapa de mídias disponíveis.
+     */
+    public HashMap<String, Midia> getMidia() {
+        return midia;
+    }
 
-	public Boolean existeMidia(String key) {
-		return midia.containsKey(key);
-	}
+    /**
+     * Verifica se uma mídia com a chave especificada existe no conjunto de mídias disponíveis.
+     *
+     * @param key A chave da mídia.
+     * @return true se a mídia existe, false caso contrário.
+     */
+    public Boolean existeMidia(String key) {
+        return midia.containsKey(key);
+    }
 
-	public void setSeries(HashMap<String, Midia> midia) {
-		this.midia = midia;
-	}
-	public HashMap<String, Cliente> getClientes() {
-		return this.clientes;
-	}
+    /**
+     * Define o conjunto de mídias disponíveis na plataforma.
+     *
+     * @param midia O mapa de mídias disponíveis.
+     */
+    public void setMidia(HashMap<String, Midia> midia) {
+        this.midia = midia;
+    }
 
-	public void setClientes(HashMap<String, Cliente> clientes) {
-		this.clientes = clientes;
-	}
+    /**
+     * Obtém o conjunto de clientes registrados na plataforma.
+     *
+     * @return O mapa de clientes registrados.
+     */
+    public HashMap<String, Cliente> getClientes() {
+        return this.clientes;
+    }
 
-	public Cliente getClienteAtual() {
-		return clienteAtual;
-	}
+    /**
+     * Define o conjunto de clientes registrados na plataforma.
+     *
+     * @param clientes O mapa de clientes registrados.
+     */
+    public void setClientes(HashMap<String, Cliente> clientes) {
+        this.clientes = clientes;
+    }
 
-	public void setClienteAtual(Cliente clienteAtual) {
-		this.clienteAtual = clienteAtual;
-	}
+    /**
+     * Obtém o cliente atualmente logado na plataforma.
+     *
+     * @return O cliente atualmente logado.
+     */
+    public Cliente getClienteAtual() {
+        return clienteAtual;
+    }
+
+    /**
+     * Define o cliente atualmente logado na plataforma.
+     *
+     * @param clienteAtual O cliente atualmente logado.
+     */
+    public void setClienteAtual(Cliente clienteAtual) {
+        this.clienteAtual = clienteAtual;
+    }
+
 
 	/**
 	 * Verifica com base na hash de clientes os usuários presentes e aquele que
@@ -327,6 +391,12 @@ public class PlataformaStreaming {
 				.orElse(null);
 	}
 
+
+	/**
+	 * Mostra em porcentagem a quantidade de clientes com mais de 15 avaliações que que o sistema possui
+	 * 
+	 * @return porcentagem do número de clientes que possuem mais de 15 avaliações 
+	 */
 	public double clientesMaisDe15Avaliacoes() {
 		int totalClientes = getClientes().size();
 		int numClientesMaisDe15Avaliacoes = (int) getClientes().values().stream()

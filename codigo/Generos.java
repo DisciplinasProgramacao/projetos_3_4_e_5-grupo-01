@@ -1,3 +1,6 @@
+/**
+ * Enumeração dos gêneros possíveis para uma mídia.
+ */
 public enum Generos {
     ACAO,
     ANIME,
