@@ -333,7 +333,7 @@ public class PlataformaStreaming {
 
 
 	/**
-	 * Busca as top10 mídias com mais vizualizaçõescom pelo menos 100 avaliações separadas por gênero. As
+	 * Busca as top10 mídias com mais vizualizações com pelo menos 100 avaliações separadas por gênero. As
 	 * mídias devem estar em ordem decrescente
 	 * 
 	 * @return top10 List com as 10 mídias com mais vizualizações em ordem
