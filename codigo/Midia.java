@@ -92,15 +92,33 @@ public class Midia {
 	 *                                         avaliação.
 	 */
 	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) throws usuarioNaoPodeComentarException {
-		if (cliente.isEspecialista() || cliente instanceof clienteProfissional) {
-			notas.put(cliente, avaliacao);
-			cliente.adicionarAvaliacao(this, avaliacao);
-		} else if (avaliacao.getComentario().equals(null) == false) {
-			throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
-		} else {
+		if(avaliacao.getComentario() != null) {
+			if(cliente.isComum()) {
+				System.out.println("entrou");
+				throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
+			}else if (cliente.isEspecialista() || cliente instanceof clienteProfissional){
+				notas.put(cliente, avaliacao);
+				cliente.adicionarAvaliacao(this, avaliacao);
+			}else {
+				System.out.println("?");
+			}
+		}else {
 			cliente.adicionarAvaliacao(this, avaliacao);
 			notas.put(cliente, avaliacao);
 		}
+		
+		
+		
+		
+//		if (cliente.isEspecialista() || cliente instanceof clienteProfissional) {
+//			notas.put(cliente, avaliacao);
+//			cliente.adicionarAvaliacao(this, avaliacao);
+//		} else if (avaliacao.getComentario()== null) {
+//			throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
+//		} else {
+//			cliente.adicionarAvaliacao(this, avaliacao);
+//			notas.put(cliente, avaliacao);
+//		}
 	}
 
 	/**
