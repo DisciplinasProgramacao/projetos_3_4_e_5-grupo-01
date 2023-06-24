@@ -94,13 +94,10 @@ public class Midia {
 	public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) throws usuarioNaoPodeComentarException {
 		if(avaliacao.getComentario() != null) {
 			if(cliente.isComum()) {
-				System.out.println("entrou");
 				throw new usuarioNaoPodeComentarException("Apenas clientes especialistas e profissionais podem comentar");
 			}else if (cliente.isEspecialista() || cliente instanceof clienteProfissional){
 				notas.put(cliente, avaliacao);
 				cliente.adicionarAvaliacao(this, avaliacao);
-			}else {
-				System.out.println("?");
 			}
 		}else {
 			cliente.adicionarAvaliacao(this, avaliacao);
@@ -288,5 +285,4 @@ public class Midia {
 	public void setMediaNotas(float mediaNotas) {
 		this.mediaNotas = mediaNotas;
 	}
-
 }

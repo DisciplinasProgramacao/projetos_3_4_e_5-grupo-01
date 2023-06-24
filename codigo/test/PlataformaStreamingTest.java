@@ -1,11 +1,9 @@
 package test;
-
+import Avaliacao;
 import Cliente;
-import Lista;
+import Filme;
 import Midia;
-import PlataformaStreaming;
 import Serie;
-
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -49,13 +47,13 @@ public class PlataformaStreamingTest {
 			c1.registrarAudiencia(s1);
 		} catch (ClienteNaoProfissional e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
          try {
 			s1.adicionarAvaliacao(c1, a1);
 		} catch (usuarioNaoPodeComentarException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
     }
     
@@ -88,22 +86,21 @@ public class PlataformaStreamingTest {
     	    try {
     	        cliente.registrarAudiencia(s1);
     	    } catch (ClienteNaoProfissional e) {
-    	        e.printStackTrace();
+//    	        e.printStackTrace();
     	    }
 
     	    plataforma.adicionarCliente(cliente);
 
     	    for (Serie serie : seriesDisponiveis) {
     	        int nota = random.nextInt(11);
-    	        String comentario = "Comentário " + i;
     	        String data = "Data " + i;
 
-    	        Avaliacao avaliacao = new Avaliacao(nota, comentario, data);
+    	        Avaliacao avaliacao = new Avaliacao(nota,data);
 
     	        try {
     	            serie.adicionarAvaliacao(cliente, avaliacao);
     	        } catch (usuarioNaoPodeComentarException e) {
-    	            e.printStackTrace();
+//    	            e.printStackTrace();
     	        }
     	    }
     	}
@@ -206,15 +203,14 @@ public class PlataformaStreamingTest {
     public void testTop10MidiasMelhorAvaliacaoSeparadaPorGenero() {
     	criador();
         List<Midia> top10PorGenero = plataforma.top10MidiasMelhorAvaliacaoSeparadaPorGenero();
-        Assertions.assertEquals(10, top10PorGenero.size());
+        assertEquals(10, top10PorGenero.size());
     }
 
     @Test
     public void testTop10MidiasMaisVisualizacaoSeparadaPorGenero() {
     	criador();
         List<Midia> top10PorGenero = plataforma.top10MidiasMaisVisualizacaoSeparadaPorGenero();
-        Assertions.assertEquals(10, top10PorGenero.size());
-        // ...
+        assertEquals(10, top10PorGenero.size());
     }
 
     @Test
@@ -224,7 +220,7 @@ public class PlataformaStreamingTest {
 			c1.registrarAudiencia(s1);
 		} catch (ClienteNaoProfissional e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
         Map<Integer, Cliente> mapaClientes = plataforma.clienteMaisAssistiuMidiasNumMidias();
         assertEquals(1, mapaClientes.size());
@@ -237,7 +233,6 @@ public class PlataformaStreamingTest {
     	criador();
         Map.Entry<String, Cliente> entry = plataforma.clienteMaisAvaliouNumAvaliacoes();
         Assertions.assertNotNull(entry);
-        // ...
     }
 
     @Test
@@ -245,5 +240,16 @@ public class PlataformaStreamingTest {
     	criador();
         double porcentagem = plataforma.clientesMaisDe15Avaliacoes();
         Assertions.assertEquals(100, porcentagem);
+    }
+    @Test
+    public void existeMidia() {
+    	plataforma.adicionarMidia(s1);
+    	assertTrue(plataforma.existeMidia("4"));
+    }
+    @Test 
+    public void getMidiaEspecifica() {
+    	plataforma.adicionarMidia(s1);
+    	Midia confirmacao = plataforma.getMidiaEspecifica("4");
+    	assertEquals(s1, confirmacao);
     }
 }
