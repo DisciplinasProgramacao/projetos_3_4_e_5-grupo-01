@@ -373,6 +373,7 @@ public abstract class Cliente {
 		}
 	}
 
+
 	/**
 	 * Verifica se o cliente é comum, retornando true caso positivo e false caso
 	 * negativo
