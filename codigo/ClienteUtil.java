@@ -193,7 +193,7 @@ public class ClienteUtil {
                             Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
 
                             if(m.isLancamento()){
-                                if(user.isEspecialista()){
+                                if(user instanceof clienteProfissional){
                                     user.adicionarAvaliacao(m, avaliacao);
                                 }
                                 else{
