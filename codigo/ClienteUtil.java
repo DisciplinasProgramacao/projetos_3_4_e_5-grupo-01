@@ -165,7 +165,7 @@ public class ClienteUtil {
 
                     if(m != null){                        
                         // LocalDate diaAssistido = user.jaAssistiu(m);
-                        if(user.jaAssistiu(m)){
+                        if(user.jaAssistiu(m) != null){
                             float nota = -1;
                             while(true){
                                 System.out.println("Qual nota você deseja dar? 1 - 5");
