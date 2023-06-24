@@ -20,7 +20,7 @@ public static Idiomas getByIndex(int index) {
     if (index >= 0 && index < idiomas.length) {
         return idiomas[index];
     } else {
-        throw new IllegalArgumentException("Índice inválido");
+        throw new IllegalArgumentException("indice inválido");
     }
 }
 }

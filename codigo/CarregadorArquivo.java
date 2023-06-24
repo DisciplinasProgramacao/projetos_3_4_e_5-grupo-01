@@ -33,7 +33,8 @@ public class CarregadorArquivo {
             while ((linha = reader.readLine()) != null) {
                 // System.out.println(linha);
 
-                app.adicionarMidia(Filme.carregaFilme(linha));
+                Filme f = Filme.carregaFilme(linha);
+                app.adicionarMidia(f);
             }
         } catch (IOException e) {
             e.printStackTrace();

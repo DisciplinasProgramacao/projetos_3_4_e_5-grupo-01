@@ -24,7 +24,7 @@ public enum Generos {
         if (index >= 0 && index < generos.length) {
             return generos[index];
         } else {
-            throw new IllegalArgumentException("Índice inválido");
+            throw new IllegalArgumentException("indice inválido");
         }
     }
 

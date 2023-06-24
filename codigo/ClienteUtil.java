@@ -164,8 +164,8 @@ public class ClienteUtil {
                     
 
                     if(m != null){                        
-                        // LocalDate diaAssistido = user.jaAssistiu(m);
-                        if(user.jaAssistiu(m)){
+                        LocalDate diaAssistido = user.jaAssistiu(m);
+                        if(diaAssistido != null){
                             float nota = -1;
                             while(true){
                                 System.out.println("Qual nota você deseja dar? 1 - 5");
@@ -185,23 +185,58 @@ public class ClienteUtil {
                                 }
                             }
 
-                            System.out.println("Deixe um comentário, caso contrário deixe em branco.");
-                            scanner.nextLine();
-                            String desc = scanner.nextLine();
-
                             LocalDate diaAtual = LocalDate.now();
-                            Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
+                            String desc = "";
 
+                            
                             if(m.isLancamento()){
                                 if(user instanceof clienteProfissional){
-                                    user.adicionarAvaliacao(m, avaliacao);
+                                    System.out.println("Deixe um comentário, caso contrário deixe em branco.");
+                                    scanner.nextLine();
+                                    desc = scanner.nextLine();
+
+                                    diaAtual = LocalDate.now();
+                                    Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
+
+                                    clienteProfissional userProfissional = (clienteProfissional) user;
+                                    userProfissional.avaliarMidia(m, avaliacao);
                                 }
                                 else{
                                     System.out.println("Somente poffisionais podem avaliar lançamentos");
                                 }
                             }
+                            else{
+                                if(user instanceof clienteEspecialista){
+                                System.out.println("Deixe um comentário, caso contrário deixe em branco.");
+                                scanner.nextLine();
+                                desc = scanner.nextLine();
+
+                                diaAtual = LocalDate.now();
+                                Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
+
+                                clienteEspecialista userProfissional = (clienteEspecialista) user;
+                                userProfissional.avaliarMidia(m, avaliacao);
+                                }
+                                else if(user instanceof clienteProfissional){
+                                    System.out.println("Deixe um comentário, caso contrário deixe em branco.");
+                                    scanner.nextLine();
+                                    desc = scanner.nextLine();
+
+                                    diaAtual = LocalDate.now();
+                                    Avaliacao avaliacao = new Avaliacao(nota, desc, diaAtual.toString());
+
+                                    clienteProfissional userProfissional = (clienteProfissional) user;
+                                    userProfissional.avaliarMidia(m, avaliacao);
+                                }
+                                else{
+                                    diaAtual = LocalDate.now();
+                                    Avaliacao avaliacao = new Avaliacao(nota, diaAtual.toString());
+
+                                    clienteComum clienteComum = (clienteComum) user;
+                                    clienteComum.avaliarMidia(m, avaliacao); 
+                                }
+                            }
                             
-                            clienteProfissional.avaliar(user, avaliacao);
                             System.out.println("Avaliação feita com sucesso.");
 
                             try {

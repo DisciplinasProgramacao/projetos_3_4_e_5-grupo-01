@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 class Main {
-    //java -Xmx8g MeuApp
+    //java -Xmx8g s
 
     // TODO: atualizar cadastro de midias de lançamento
     // TODO: atualizar clientes profissionais
