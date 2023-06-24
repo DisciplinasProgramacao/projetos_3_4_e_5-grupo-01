@@ -295,6 +295,7 @@ public class ClienteUtil {
                          Cliente cliente = entry.getValue();
                          System.out.println("Cliente: " + cliente);
                          System.out.println("Quantidade de mídias assistidas: " + quantidadeMidias);
+                   }
                 }catch(Exception e) {
                     System.out.println("Não foi possível buscar suas avaliações");
                     System.out.println(e);

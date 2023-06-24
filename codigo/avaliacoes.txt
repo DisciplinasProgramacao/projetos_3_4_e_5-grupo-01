@@ -1,3 +1,4 @@
 
 vini123;3989;3.0;filme mais ou menos;2023-05-30
 vini;0;5.0;top;2023-06-24
+vinic;1;4.0;top;2023-06-24
