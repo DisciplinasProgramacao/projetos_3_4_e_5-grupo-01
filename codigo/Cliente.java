@@ -198,8 +198,9 @@ public abstract class Cliente {
 	 * @return a data em que o cliente assistiu a mídia, ou null se não foi
 	 *         assistida
 	 */
-	public LocalDate jaAssistiu(Midia m) {
-		return listaJaVista.get(m);
+	public boolean jaAssistiu(Midia m) {
+
+		return listaJaVista.containsKey(m);
 	}
 
 	/**
